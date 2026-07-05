@@ -473,7 +473,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "yeniii.kicad_pro",
+    "filename": "Digital_Logic_XOR_Gate_Design.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -640,8 +640,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "yeniii.kicad_sch",
-        "name": "yeniii",
+        "filename": "Digital_Logic_XOR_Gate_Design.kicad_sch",
+        "name": "Digital_Logic_XOR_Gate_Design",
         "uuid": "8e7ffc59-5272-4da8-8bf8-7d2e4ebbbfca"
       }
     ],
