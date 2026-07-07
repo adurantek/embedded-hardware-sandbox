@@ -468,7 +468,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 41.91) (xy 31.75 41.91)
+			(xy 120.65 109.22) (xy 116.84 109.22)
 		)
 		(stroke
 			(width 0)
@@ -478,7 +478,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 41.91) (xy 31.75 38.1)
+			(xy 116.84 109.22) (xy 116.84 105.41)
 		)
 		(stroke
 			(width 0)
@@ -488,7 +488,7 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 34.29) (xy 34.29 34.29)
+			(xy 118.11 101.6) (xy 119.38 101.6)
 		)
 		(stroke
 			(width 0)
@@ -498,7 +498,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 35.56) (xy 33.02 35.56)
+			(xy 116.84 102.87) (xy 118.11 102.87)
 		)
 		(stroke
 			(width 0)
@@ -508,7 +508,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 38.1) (xy 107.95 38.1)
+			(xy 190.5 105.41) (xy 193.04 105.41)
 		)
 		(stroke
 			(width 0)
@@ -518,7 +518,7 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 35.56) (xy 33.02 34.29)
+			(xy 118.11 102.87) (xy 118.11 101.6)
 		)
 		(stroke
 			(width 0)
@@ -528,7 +528,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 113.03 38.1 0)
+		(at 198.12 105.41 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -539,7 +539,7 @@
 		(fields_autoplaced yes)
 		(uuid "34eb7d08-20fd-4bc7-ab34-f1ca680b29c6")
 		(property "Reference" "J2"
-			(at 115.57 38.0999 0)
+			(at 200.66 105.4099 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -550,7 +550,7 @@
 			)
 		)
 		(property "Value" "Screw_Terminal_01x02"
-			(at 115.57 40.6399 0)
+			(at 200.66 107.9499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -561,7 +561,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 113.03 38.1 0)
+			(at 198.12 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -572,7 +572,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 38.1 0)
+			(at 198.12 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -583,7 +583,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 113.03 38.1 0)
+			(at 198.12 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -600,7 +600,7 @@
 			(uuid "7a5da935-418d-4959-86f3-71027f25c718")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "J2")
 					(unit 1)
@@ -610,7 +610,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 68.58 68.58 0)
+		(at 153.67 135.89 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -621,7 +621,7 @@
 		(fields_autoplaced yes)
 		(uuid "46e8a4e3-59ac-462b-b710-09f72492c9d2")
 		(property "Reference" "J3"
-			(at 71.12 68.5799 0)
+			(at 156.21 135.8899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -632,7 +632,7 @@
 			)
 		)
 		(property "Value" "Screw_Terminal_01x02"
-			(at 71.12 71.1199 0)
+			(at 156.21 138.4299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -643,7 +643,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 68.58 68.58 0)
+			(at 153.67 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -654,7 +654,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 68.58 0)
+			(at 153.67 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -665,7 +665,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 68.58 68.58 0)
+			(at 153.67 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -682,7 +682,7 @@
 			(uuid "a23c57bc-bf1f-45ab-9f85-4aa26e302591")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "J3")
 					(unit 1)
@@ -692,7 +692,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 63.5 71.12 0)
+		(at 148.59 138.43 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -703,7 +703,7 @@
 		(fields_autoplaced yes)
 		(uuid "8832b600-95c5-428e-a61e-4aae53331b8e")
 		(property "Reference" "#PWR06"
-			(at 63.5 77.47 0)
+			(at 148.59 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -714,7 +714,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 63.5 76.2 0)
+			(at 148.59 143.51 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -724,7 +724,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 71.12 0)
+			(at 148.59 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -735,7 +735,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 71.12 0)
+			(at 148.59 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -746,7 +746,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 63.5 71.12 0)
+			(at 148.59 138.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -760,7 +760,7 @@
 			(uuid "19df7c87-3847-4400-be45-d6cd7a1d45c8")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "#PWR06")
 					(unit 1)
@@ -770,7 +770,7 @@
 	)
 	(symbol
 		(lib_id "power:+12V")
-		(at 63.5 68.58 0)
+		(at 148.59 135.89 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -781,7 +781,7 @@
 		(fields_autoplaced yes)
 		(uuid "a8cb708d-3dc0-4160-9cfb-34f108a1043a")
 		(property "Reference" "#PWR05"
-			(at 63.5 72.39 0)
+			(at 148.59 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -792,7 +792,7 @@
 			)
 		)
 		(property "Value" "+12V"
-			(at 63.5 63.5 0)
+			(at 148.59 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -802,7 +802,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 68.58 0)
+			(at 148.59 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -813,7 +813,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 68.58 0)
+			(at 148.59 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -824,7 +824,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 63.5 68.58 0)
+			(at 148.59 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -838,7 +838,7 @@
 			(uuid "0d22f389-3afe-4e06-8f99-0ee5c84edd59")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "#PWR05")
 					(unit 1)
@@ -848,7 +848,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 107.95 40.64 0)
+		(at 193.04 107.95 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -859,7 +859,7 @@
 		(fields_autoplaced yes)
 		(uuid "af28ee5e-f250-4f7d-87a3-2d15e0cb5199")
 		(property "Reference" "#PWR04"
-			(at 107.95 46.99 0)
+			(at 193.04 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -870,7 +870,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 107.95 45.72 0)
+			(at 193.04 113.03 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -880,7 +880,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 107.95 40.64 0)
+			(at 193.04 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -891,7 +891,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 107.95 40.64 0)
+			(at 193.04 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -902,7 +902,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 107.95 40.64 0)
+			(at 193.04 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -916,7 +916,7 @@
 			(uuid "25d9f4dd-8ec6-48df-b012-3fdab99a388a")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "#PWR04")
 					(unit 1)
@@ -926,7 +926,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 26.67 38.1 180)
+		(at 111.76 105.41 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -937,7 +937,7 @@
 		(fields_autoplaced yes)
 		(uuid "e998e8a3-31d6-474b-9586-06ed6b85f312")
 		(property "Reference" "J1"
-			(at 26.67 29.21 0)
+			(at 111.76 96.52 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -947,7 +947,7 @@
 			)
 		)
 		(property "Value" "Screw_Terminal_01x02"
-			(at 26.67 31.75 0)
+			(at 111.76 99.06 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -957,7 +957,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 26.67 38.1 0)
+			(at 111.76 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -968,7 +968,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 26.67 38.1 0)
+			(at 111.76 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -979,7 +979,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 26.67 38.1 0)
+			(at 111.76 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -996,7 +996,7 @@
 			(uuid "be28a218-1412-46be-9078-75cd315f0ec8")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "J1")
 					(unit 1)
@@ -1006,7 +1006,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 34.29 34.29 0)
+		(at 119.38 101.6 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -1017,7 +1017,7 @@
 		(fields_autoplaced yes)
 		(uuid "f50d97af-1ca2-40db-b584-d4dad1acab36")
 		(property "Reference" "#PWR02"
-			(at 34.29 40.64 0)
+			(at 119.38 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1028,7 +1028,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 34.29 39.37 0)
+			(at 119.38 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1038,7 +1038,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 34.29 34.29 0)
+			(at 119.38 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1049,7 +1049,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 34.29 0)
+			(at 119.38 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1060,7 +1060,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 34.29 34.29 0)
+			(at 119.38 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1074,7 +1074,7 @@
 			(uuid "26127406-af87-4d73-82c0-17bc9d8a2e6f")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(reference "#PWR02")
 					(unit 1)
@@ -1083,7 +1083,7 @@
 		)
 	)
 	(sheet
-		(at 35.56 15.24)
+		(at 120.65 82.55)
 		(size 69.85 44.45)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1098,8 +1098,8 @@
 			(color 0 0 0 0)
 		)
 		(uuid "cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98")
-		(property "Sheetname" "SesKuvvetlendirici"
-			(at 35.56 14.5284 0)
+		(property "Sheetname" "Amplifier"
+			(at 120.65 81.8384 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1110,7 +1110,7 @@
 			)
 		)
 		(property "Sheetfile" "amplifier.kicad_sch"
-			(at 35.56 60.2746 0)
+			(at 120.65 127.5846 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1121,7 +1121,7 @@
 			)
 		)
 		(pin "AUDIO_IN" input
-			(at 35.56 41.91 180)
+			(at 120.65 109.22 180)
 			(uuid "c1919840-629f-46c1-afd1-c60ee17ea5c9")
 			(effects
 				(font
@@ -1131,7 +1131,7 @@
 			)
 		)
 		(pin "AUDIO_OUT" output
-			(at 105.41 38.1 0)
+			(at 190.5 105.41 0)
 			(uuid "e397e489-a8fc-41e5-a0ed-27a0c1778fb2")
 			(effects
 				(font
@@ -1141,7 +1141,7 @@
 			)
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7"
 					(page "2")
 				)

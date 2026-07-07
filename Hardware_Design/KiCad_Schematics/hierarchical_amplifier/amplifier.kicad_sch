@@ -1183,7 +1183,7 @@
 			(uuid "0a578aeb-9fb0-4c4d-9a7f-fbf804992194")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "#PWR03")
 					(unit 1)
@@ -1201,7 +1201,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "030b32bf-7607-4af7-be01-88ac97c27abe")
 		(property "Reference" "#PWR01"
 			(at 133.35 90.17 0)
@@ -1215,7 +1214,7 @@
 			)
 		)
 		(property "Value" "+12V"
-			(at 133.35 81.28 0)
+			(at 133.35 82.804 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1261,7 +1260,7 @@
 			(uuid "ed7815e7-32ce-4301-b18b-57833a034934")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "#PWR01")
 					(unit 1)
@@ -1371,7 +1370,7 @@
 			(uuid "6af33d6f-1c64-408d-9827-0bcb8ac0c2a4")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "Q1")
 					(unit 1)
@@ -1453,7 +1452,7 @@
 			(uuid "3e353a36-699c-4e56-8776-64268e3a95a9")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "R1")
 					(unit 1)
@@ -1484,7 +1483,8 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 135.89 88.392 0)
+			(at 134.366 88.138 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1530,7 +1530,7 @@
 			(uuid "c538b2e9-a23e-4ecc-b7f5-4fb4ad4f857b")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "#FLG01")
 					(unit 1)
@@ -1562,6 +1562,7 @@
 		)
 		(property "Value" "PWR_FLAG"
 			(at 133.604 111.506 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1607,7 +1608,7 @@
 			(uuid "dad70508-ceeb-47db-8f60-d351bcb08133")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "#FLG02")
 					(unit 1)
@@ -1625,10 +1626,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "6634012b-6a35-4dc0-8ca6-64771220267a")
 		(property "Reference" "R4"
-			(at 146.05 106.6799 0)
+			(at 144.526 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1639,7 +1639,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 146.05 109.2199 0)
+			(at 144.78 108.712 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1689,7 +1689,7 @@
 			(uuid "2eea6fbc-d5b1-46e1-b856-120509036b9e")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "R4")
 					(unit 1)
@@ -1709,7 +1709,7 @@
 		(dnp no)
 		(uuid "81c9c578-4da2-410a-8dd7-01e30a9766c2")
 		(property "Reference" "C3"
-			(at 147.32 86.614 90)
+			(at 149.86 92.71 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1719,7 +1719,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 147.32 88.9 90)
+			(at 150.876 95.758 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1768,7 +1768,7 @@
 			(uuid "4080f570-c367-46cf-a132-077b1b33cf92")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "C3")
 					(unit 1)
@@ -1850,7 +1850,7 @@
 			(uuid "a273a3e0-cc9d-43ad-8549-231af8e4537f")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "C2")
 					(unit 1)
@@ -1868,10 +1868,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "da72bb12-214f-4d8e-927a-afaeb05dc3db")
 		(property "Reference" "R3"
-			(at 146.05 88.8999 0)
+			(at 139.7 88.9 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1882,7 +1881,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 146.05 91.4399 0)
+			(at 138.176 90.932 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1932,7 +1931,7 @@
 			(uuid "8c95e482-4352-4f31-af51-a16560092e80")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "R3")
 					(unit 1)
@@ -2014,7 +2013,7 @@
 			(uuid "3432b8e3-4f42-4447-868c-91df5ddbefd8")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "R2")
 					(unit 1)
@@ -2032,10 +2031,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "ffbb54f0-efe5-46e4-86c1-bdb2e9f27098")
 		(property "Reference" "C1"
-			(at 154.94 106.6799 0)
+			(at 153.416 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2046,7 +2044,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 154.94 109.2199 0)
+			(at 153.416 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2096,7 +2094,7 @@
 			(uuid "e80995a3-4702-4308-a0ea-a2cb3464cbae")
 		)
 		(instances
-			(project "kurs4"
+			(project "hierarchical_amplifier"
 				(path "/1680d475-8d12-44de-9d5b-0889d33728e7/cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98"
 					(reference "C1")
 					(unit 1)

@@ -651,11 +651,11 @@
   "sheets": [
     [
       "1680d475-8d12-44de-9d5b-0889d33728e7",
-      "kurs4"
+      "hierarchical_amplifier"
     ],
     [
       "cbe5c0ee-a82d-4d0f-91ce-87dab7d0ab98",
-      "SesKuvvetlendirici"
+      "Amplifier"
     ]
   ],
   "text_variables": {},
