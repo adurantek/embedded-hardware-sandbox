@@ -473,7 +473,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "kurs4.kicad_pro",
+    "filename": "hierarchical_amplifier.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -640,8 +640,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "kurs4.kicad_sch",
-        "name": "kurs4",
+        "filename": "hierarchical_amplifier.kicad_sch",
+        "name": "hierarchical_amplifier",
         "uuid": "1680d475-8d12-44de-9d5b-0889d33728e7"
       }
     ],
