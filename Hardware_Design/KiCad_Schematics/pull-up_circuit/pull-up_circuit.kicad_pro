@@ -472,7 +472,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "kurs5.kicad_pro",
+    "filename": "pull-up_circuit.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -627,8 +627,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "kurs5.kicad_sch",
-        "name": "Root",
+        "filename": "pull-up_circuit.kicad_sch",
+        "name": "pull-up_circuit",
         "uuid": "9746be52-5886-4799-9fa4-b9200c0272a5"
       }
     ],
@@ -638,7 +638,7 @@
   "sheets": [
     [
       "9746be52-5886-4799-9fa4-b9200c0272a5",
-      "Root"
+      "pull-up_circuit"
     ]
   ],
   "text_variables": {},
