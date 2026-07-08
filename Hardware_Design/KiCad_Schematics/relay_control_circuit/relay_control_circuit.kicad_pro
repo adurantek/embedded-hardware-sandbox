@@ -473,7 +473,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "kurs2.kicad_pro",
+    "filename": "relay_control_circuit.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -648,9 +648,9 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "kurs2.kicad_sch",
-        "name": "kurs2",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "filename": "relay_control_circuit.kicad_sch",
+        "name": "relay_control_circuit",
+        "uuid": "cb8492f1-f235-422f-9ca6-ac54ad51901f"
       }
     ],
     "used_designators": "",
@@ -659,7 +659,7 @@
   "sheets": [
     [
       "cb8492f1-f235-422f-9ca6-ac54ad51901f",
-      "Root"
+      "relay_control_circuit"
     ]
   ],
   "text_variables": {},
