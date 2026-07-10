@@ -20,3 +20,7 @@ R1 ve R2 direncini, transistörün Base bacağına **sabit bir voltaj değeri** 
 ### PCB Design
 
 ![Schematic](images/pcb_design.jpg)
+
+### PCB Design
+
+![3D View](images/3d_view.jpg)

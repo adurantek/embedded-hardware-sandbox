@@ -29,6 +29,8 @@ Bu devreyi küçük voltage ile büyük voltaj gerektiren durumları röle ile n
 
 ![PCB Design](images/pcb_design.jpg)
 
+![3D View](images/3d_view.jpg)
+
 ## Design Decisions
 
 R1 direnci rölenin 3 nolu hattında kısa devre olmaması için, SW Push simülasyonu gerçekleştirmek için, Screw Terminal voltaj vermemiz için, D1 diyotu ise **Fly-Back** işlevi görmesi için yani röle 4 nolu hattan 3 nolu hata tetiklendiğinde üzerindeki **fazla akımı toprağa boşaltması için** eklenmiştir.

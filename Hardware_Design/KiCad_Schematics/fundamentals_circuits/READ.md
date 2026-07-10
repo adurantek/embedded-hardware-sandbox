@@ -75,3 +75,7 @@ I designed and simulated this circuit to understand the behavior of an inductor 
 ## PCB Designs
 
 ![PCB Designs](images/pcb-design.jpg)
+
+## 3D View
+
+![3D View](images/3d_view.jpg)

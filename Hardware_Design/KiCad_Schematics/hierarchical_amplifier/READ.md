@@ -20,3 +20,7 @@ I used the R1 and R2 resistors to provide a **stable voltage value** to the Base
 ### PCB Design
 
 ![Schematic](images/pcb_design.jpg)
+
+### 3D View
+
+![Schematic](images/3d_view.jpg)

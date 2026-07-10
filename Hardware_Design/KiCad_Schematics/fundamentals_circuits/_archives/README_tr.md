@@ -11,7 +11,7 @@ Bu devreyi akımın **paralel bağlı dirençlerde** davranışını görebilmek
     2 Resistors
     1 1x2 Connector
 
-![Schematic](current_divider.jpg)
+![Schematic](images/current_divider.jpg)
 
 ## Voltage Divider
 
@@ -22,7 +22,7 @@ Bu devreyi gerilimin **seri bağlı dirençlerde** davranışını görebilmek i
     2 Resistors
     1 1x2 Connector
 
-![Schematic](voltage_divider.jpg)
+![Schematic](images/voltage_divider.jpg)
 
 ## Half-Wave Rectifier
 
@@ -34,7 +34,7 @@ Bu devreyi, sinüs sinyalinin **sadece pozitif veya negatif kısımlarını** na
     1 Resistor
     1 1x2 Connector
 
-![Schematic](half-wawe_rectifier.jpg)
+![Schematic](images/half-wawe_rectifier.jpg)
 
 ## Full-Wave Rectifier
 
@@ -46,7 +46,7 @@ Bu devreyi, sinüs sinyalinin **pozitif-negatif kısımlarını** nasıl doğrul
     1 Resistor
     1 1x2 Connector
 
-![Schematic](full-wawe_rectifier.jpg)
+![Schematic](images/full-wawe_rectifier.jpg)
 
 ## RC Circuit
 
@@ -58,7 +58,7 @@ Bu devreyi, DC kaynağa seri bağlanan bir kapasitörün başta kısa devre gibi
     1 Resistor
     1 1x2 Connector
 
-![Schematic](RC_circuit.jpg)
+![Schematic](images/RC_circuit.jpg)
 
 ## RL Circuit
 
@@ -70,6 +70,12 @@ Bu devreyi, DC kaynağa seri bağlanan bir indüktörün başta açık devre gib
     1 Resistor
     1 1x2 Connector
 
-![Schematic](RC_circuit.jpg)
+![Schematic](images/RC_circuit.jpg)
 
-![PCB DESİGNS](pcb-design.jpg)
+## PCB DESİGNS
+
+![PCB DESİGNS](images/pcb-design.jpg)
+
+## 3D View
+
+![3D View](images/3d_view.jpg)

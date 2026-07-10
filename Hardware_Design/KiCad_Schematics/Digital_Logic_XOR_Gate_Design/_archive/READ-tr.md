@@ -26,3 +26,5 @@ Bu devreyi XOR entegresinin iç yapısını tasarlayarak, hem sayısal sistem ta
 ![Schematic Design](images/schematic-design.jpg)
 
 ![PCB Design](images/pcb-design.jpg)
+
+![3D View](images/3d_view.jpg)

@@ -21,8 +21,10 @@ I designed this circuit by replicating the internal structure of an XOR gate, ai
     1x 74LS08 (AND)
     1x 74LS32 (OR)
 
-### Wiews
+### Images
 
-![Schematic Design](./images/schematic-design.jpg)
+![Schematic Design](images/schematic-design.jpg)
 
-![PCB Design](./images/pcb-design.jpg)
+![PCB Design](images/pcb-design.jpg)
+
+![3D View](images/3d_view.jpg)

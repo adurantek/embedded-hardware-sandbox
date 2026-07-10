@@ -29,6 +29,8 @@ I designed this circuit to learn how we can easily switch high-voltage/high-powe
 
 ![PCB Design](images/pcb_design.jpg)
 
+![3D View](images/3d_view.jpg)
+
 ## Design Decisions
 
 The R1 resistor was added to prevent a short circuit on the relay's pin 3, the Push Button was included to perform the simulation, and the Screw Terminal was used to apply voltage to the circuit. The D1 diode acts as a **Flyback diode**; it was added to safely route the **excess back-EMF current to the ground** when the relay switches from pin 4 to pin 3, protecting the circuit.

@@ -53,6 +53,8 @@ $$P = \frac{V_{CC}^2}{R_3} = \frac{5^2}{330} \approx 75\text{ mW}$$
 
 ![PCB Design](images/pcb_design.jpg)
 
+![PCB Design](images/3d_view.jpg)
+
 ## Design Decisions
 
 Resistors R3 and R4 were placed to prevent short circuits and limit current, the push button was utilized to simulate the pull-up mechanism, and the LED was included for visual status control.
