@@ -1291,7 +1291,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Axial_L12.0mm_D5.0mm_P15.24mm_Horizontal_Fastron_MISC"
+		(property "Footprint" "Inductor_THT:L_Radial_D6.0mm_P4.00mm"
 			(at 133.35 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -1452,7 +1452,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 126.365 83.82 0)
 			(hide yes)
 			(show_name no)
