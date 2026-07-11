@@ -504,6 +504,146 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Transistor_FET:2N7002"
 			(pin_names
 				(offset 0)
@@ -820,11 +960,65 @@
 			(embedded_fonts no)
 		)
 	)
+	(rectangle
+		(start 113.03 77.47)
+		(end 157.48 104.14)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "223bf0ca-2ac6-46dc-a987-c8af565de4c7")
+	)
+	(text "Buck Converter"
+		(exclude_from_sim no)
+		(at 149.606 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "492049b5-4709-4b6d-9b7b-22001d3bc8d0")
+	)
+	(junction
+		(at 146.05 86.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "220fd4bb-1c9f-47df-a03b-2cb83b8b41c0")
+	)
+	(junction
+		(at 137.16 86.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3dcac010-885c-497b-ac3c-f7ddf8ca6623")
+	)
 	(junction
 		(at 129.54 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "81a71ace-7e7b-46b6-82c5-3c1e458bb96b")
+	)
+	(wire
+		(pts
+			(xy 147.32 86.36) (xy 146.05 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4740f552-3ce1-4b62-9c13-a2817fa73ea9")
+	)
+	(wire
+		(pts
+			(xy 146.05 86.36) (xy 137.16 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b170daca-fae5-410e-bb35-2baf9b008f9a")
 	)
 	(hierarchical_label "GND"
 		(shape passive)
@@ -839,7 +1033,7 @@
 	)
 	(hierarchical_label "OUTPUT"
 		(shape output)
-		(at 137.16 86.36 0)
+		(at 147.32 86.36 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -858,6 +1052,17 @@
 			(justify right)
 		)
 		(uuid "55be9485-75c6-4c5d-bb78-b18d838b3c26")
+	)
+	(hierarchical_label "GND"
+		(shape passive)
+		(at 119.38 93.98 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5c002b84-a7fe-400c-92f7-ae665850c49b")
 	)
 	(hierarchical_label "GND"
 		(shape passive)
@@ -880,6 +1085,99 @@
 			(justify right)
 		)
 		(uuid "75825a8c-1ac7-4530-b14c-2e00b6447e66")
+	)
+	(hierarchical_label "GND"
+		(shape passive)
+		(at 146.05 93.98 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8e5cc9f-36a4-4fa6-b987-6c339546edd9")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 146.05 90.17 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "848db9e3-a776-49b8-8006-23b2e15e42f5")
+		(property "Reference" "R1"
+			(at 148.59 88.8999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1k"
+			(at 148.59 91.4399 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
+			(at 144.272 90.17 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 146.05 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 146.05 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "745eb7b6-127e-4c57-b134-f5422f0ec1a7")
+		)
+		(pin "2"
+			(uuid "d95b132a-8c03-479d-8ba3-e4c07e95bb62")
+		)
+		(instances
+			(project "buck_converter"
+				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/cdcec0f9-ff02-4d81-8202-3c15cdcd6c0f"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -914,7 +1212,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P2.50mm"
+		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P1.50mm"
 			(at 138.1252 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -1074,7 +1372,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P2.50mm"
+		(property "Footprint" "Diode_THT:D_A-405_P7.62mm_Horizontal"
 			(at 129.54 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -1203,6 +1501,87 @@
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/cdcec0f9-ff02-4d81-8202-3c15cdcd6c0f"
 					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 119.38 90.17 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f2748dee-2a71-451b-83dd-e85dd931946f")
+		(property "Reference" "C2"
+			(at 114.046 88.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100u"
+			(at 114.046 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P1.50mm"
+			(at 120.3452 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 119.38 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "489dccf8-45e1-49f4-9f26-fbe099c168d2")
+		)
+		(pin "2"
+			(uuid "1f0205bb-cd23-4598-af41-b84428e976e2")
+		)
+		(instances
+			(project "buck_converter"
+				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/cdcec0f9-ff02-4d81-8202-3c15cdcd6c0f"
+					(reference "C2")
 					(unit 1)
 				)
 			)
