@@ -626,7 +626,7 @@
         "version": 0
       },
       "model_mode": 4,
-      "workbook_filename": ""
+      "workbook_filename": "buck_converter.wbk"
     },
     "page_layout_descr_file": "",
     "plot_directory": "",
@@ -640,7 +640,7 @@
         "uuid": "e6ad1407-9765-4ff4-965d-dd4ca2472230"
       }
     ],
-    "used_designators": "",
+    "used_designators": "Q2-4,C5,D3,R3-5",
     "variants": []
   },
   "sheets": [
@@ -655,6 +655,14 @@
     [
       "73cf55f2-6ad2-4256-9459-c6c839187002",
       "for Simulation"
+    ],
+    [
+      "17a33480-18ad-42de-a168-1ef28a6dbfbd",
+      "Bootstrap Driver - for simulation"
+    ],
+    [
+      "99839e64-c2cf-4e0f-8bc6-cadc19dd91e8",
+      "Bootstrap Driver"
     ]
   ],
   "text_variables": {},

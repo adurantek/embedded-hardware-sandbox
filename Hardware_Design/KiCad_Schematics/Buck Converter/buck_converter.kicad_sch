@@ -424,7 +424,7 @@
 		(at 76.2 99.06 180)
 		(unit 1)
 		(body_style 1)
-		(exclude_from_sim no)
+		(exclude_from_sim yes)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
@@ -504,13 +504,13 @@
 		(at 76.2 104.14 0)
 		(unit 1)
 		(body_style 1)
-		(exclude_from_sim no)
+		(exclude_from_sim yes)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6c35ca64-fa34-4fcb-850a-85395f5bc127")
-		(property "Reference" "J3"
+		(property "Reference" "J2"
 			(at 74.93 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -570,7 +570,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
-					(reference "J3")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -581,13 +581,13 @@
 		(at 76.2 113.03 180)
 		(unit 1)
 		(body_style 1)
-		(exclude_from_sim no)
+		(exclude_from_sim yes)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c0389658-2134-46d0-a231-cff28d497b5d")
-		(property "Reference" "J2"
+		(property "Reference" "J3"
 			(at 74.93 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -650,8 +650,55 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
-					(reference "J2")
+					(reference "J3")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 181.61 91.44)
+		(size 27.94 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+			(color 0 255 0 1)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "17a33480-18ad-42de-a168-1ef28a6dbfbd")
+		(property "Sheetname" "Bootstrap Driver - for simulation"
+			(at 181.61 90.7284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "bootstrap_driver.kicad_sch"
+			(at 181.61 117.4246 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "buck_converter"
+				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
+					(page "4")
 				)
 			)
 		)
@@ -667,7 +714,7 @@
 		(stroke
 			(width 0.1524)
 			(type solid)
-			(color 194 0 0 1)
+			(color 0 132 0 1)
 		)
 		(fill
 			(color 0 0 0 0)
@@ -704,9 +751,95 @@
 		)
 	)
 	(sheet
+		(at 95.25 124.46)
+		(size 30.48 22.86)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "99839e64-c2cf-4e0f-8bc6-cadc19dd91e8")
+		(property "Sheetname" "Bootstrap Driver"
+			(at 95.25 123.7484 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "bootstrap.kicad_sch"
+			(at 95.25 147.9046 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "GATE" output
+			(at 95.25 129.54 180)
+			(uuid "6511a55e-9938-4356-8b66-dc8cabb8ccef")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SOURCE" output
+			(at 95.25 134.62 180)
+			(uuid "ca2089f5-651f-4e44-8601-5db674520dad")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "VCC" input
+			(at 125.73 129.54 0)
+			(uuid "2e5af409-8060-4206-90b1-69b28feb311e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VPULSE+" input
+			(at 125.73 134.62 0)
+			(uuid "e8a4f498-e6f1-4279-bc8a-88571c3574ab")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "buck_converter"
+				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 95.25 91.44)
 		(size 30.48 25.4)
-		(exclude_from_sim no)
+		(exclude_from_sim yes)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
