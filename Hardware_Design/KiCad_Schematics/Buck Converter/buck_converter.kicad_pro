@@ -620,6 +620,14 @@
     "meta": {
       "version": 1
     },
+    "ngspice": {
+      "fix_include_paths": true,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 4,
+      "workbook_filename": ""
+    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "reuse_designators": true,
@@ -632,7 +640,7 @@
         "uuid": "e6ad1407-9765-4ff4-965d-dd4ca2472230"
       }
     ],
-    "used_designators": "R1,C2",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
@@ -643,6 +651,10 @@
     [
       "cdcec0f9-ff02-4d81-8202-3c15cdcd6c0f",
       "Buck Converter"
+    ],
+    [
+      "73cf55f2-6ad2-4256-9459-c6c839187002",
+      "for Simulation"
     ]
   ],
   "text_variables": {},

@@ -330,7 +330,7 @@
 		)
 	)
 	(label "GND"
-		(at 111.76 96.52 0)
+		(at 81.28 99.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -340,7 +340,7 @@
 		(uuid "198815b9-51a0-4786-8cb9-ebe6daf7f569")
 	)
 	(label "OUTPUT"
-		(at 111.76 101.6 0)
+		(at 81.28 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -350,7 +350,7 @@
 		(uuid "389af178-7627-4510-a7c7-609fe05d8f5a")
 	)
 	(label "GND"
-		(at 140.97 114.3 270)
+		(at 110.49 116.84 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -360,7 +360,7 @@
 		(uuid "3e0015cb-aa9f-45f0-84f2-d1c381c4f890")
 	)
 	(label "DC"
-		(at 111.76 93.98 0)
+		(at 81.28 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -370,7 +370,7 @@
 		(uuid "8ca1e0f8-c3d1-46d3-94b4-287fcaf8aedd")
 	)
 	(label "PULSE"
-		(at 111.76 107.95 0)
+		(at 81.28 110.49 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -380,7 +380,7 @@
 		(uuid "8e332d4a-7fab-4d6d-b0c5-10c716da08db")
 	)
 	(label "GND"
-		(at 111.76 110.49 0)
+		(at 81.28 113.03 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -390,7 +390,7 @@
 		(uuid "9a1bf331-64fe-4f3b-81ef-5ed202bb4aed")
 	)
 	(label "OUTPUT"
-		(at 156.21 101.6 0)
+		(at 125.73 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -400,7 +400,7 @@
 		(uuid "9b82b0ed-e1f7-4bb6-91dd-7a18ba50f562")
 	)
 	(label "DC"
-		(at 125.73 99.06 180)
+		(at 95.25 101.6 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -410,7 +410,7 @@
 		(uuid "afdf7f2e-d355-4137-a605-0581b6b7d7cf")
 	)
 	(label "PULSE"
-		(at 125.73 104.14 180)
+		(at 95.25 106.68 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -421,7 +421,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
-		(at 106.68 96.52 180)
+		(at 76.2 99.06 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -431,7 +431,7 @@
 		(dnp no)
 		(uuid "1602046a-2c0f-4f76-8fdb-b5c9babdfbb6")
 		(property "Reference" "J1"
-			(at 105.41 95.25 0)
+			(at 74.93 97.79 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -441,7 +441,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Socket"
-			(at 107.315 91.44 0)
+			(at 76.835 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -452,7 +452,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical"
-			(at 106.68 96.52 0)
+			(at 76.2 99.06 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -463,7 +463,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 106.68 96.52 0)
+			(at 76.2 99.06 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -474,7 +474,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 106.68 96.52 0)
+			(at 76.2 99.06 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -501,7 +501,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 106.68 101.6 0)
+		(at 76.2 104.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -511,7 +511,7 @@
 		(dnp no)
 		(uuid "6c35ca64-fa34-4fcb-850a-85395f5bc127")
 		(property "Reference" "J3"
-			(at 105.41 101.6 0)
+			(at 74.93 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -521,7 +521,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 107.315 99.06 0)
+			(at 76.835 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -532,7 +532,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 106.68 101.6 0)
+			(at 76.2 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -543,7 +543,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 106.68 101.6 0)
+			(at 76.2 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -554,7 +554,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 106.68 101.6 0)
+			(at 76.2 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -578,7 +578,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
-		(at 106.68 110.49 180)
+		(at 76.2 113.03 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -588,7 +588,7 @@
 		(dnp no)
 		(uuid "c0389658-2134-46d0-a231-cff28d497b5d")
 		(property "Reference" "J2"
-			(at 105.41 109.22 0)
+			(at 74.93 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -598,7 +598,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Socket"
-			(at 107.315 105.41 0)
+			(at 76.835 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -609,7 +609,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical"
-			(at 106.68 110.49 0)
+			(at 76.2 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -620,7 +620,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 106.68 110.49 0)
+			(at 76.2 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -631,7 +631,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 106.68 110.49 0)
+			(at 76.2 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -657,7 +657,54 @@
 		)
 	)
 	(sheet
-		(at 125.73 88.9)
+		(at 147.32 91.44)
+		(size 29.21 25.4)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+			(color 194 0 0 1)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "73cf55f2-6ad2-4256-9459-c6c839187002")
+		(property "Sheetname" "for Simulation"
+			(at 147.32 90.7284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "simulation.kicad_sch"
+			(at 147.32 117.4246 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "buck_converter"
+				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 95.25 91.44)
 		(size 30.48 25.4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -673,7 +720,7 @@
 		)
 		(uuid "cdcec0f9-ff02-4d81-8202-3c15cdcd6c0f")
 		(property "Sheetname" "Buck Converter"
-			(at 125.73 88.1884 0)
+			(at 95.25 90.7284 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -684,7 +731,7 @@
 			)
 		)
 		(property "Sheetfile" "buck_hierarchical.kicad_sch"
-			(at 125.73 114.8846 0)
+			(at 95.25 117.4246 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -695,7 +742,7 @@
 			)
 		)
 		(pin "DC" input
-			(at 125.73 99.06 180)
+			(at 95.25 101.6 180)
 			(uuid "bb7178b5-3025-45bf-81af-a46446bd8890")
 			(effects
 				(font
@@ -705,7 +752,7 @@
 			)
 		)
 		(pin "OUTPUT" output
-			(at 156.21 101.6 0)
+			(at 125.73 104.14 0)
 			(uuid "bbf3a9cf-7666-4b9a-8b7d-5b5ebd6ab03a")
 			(effects
 				(font
@@ -715,7 +762,7 @@
 			)
 		)
 		(pin "PULSE" input
-			(at 125.73 104.14 180)
+			(at 95.25 106.68 180)
 			(uuid "87d552ec-34c8-404b-9ce1-6147a0459070")
 			(effects
 				(font
@@ -725,7 +772,7 @@
 			)
 		)
 		(pin "GND" passive
-			(at 140.97 114.3 270)
+			(at 110.49 116.84 270)
 			(uuid "c975481a-770a-4e07-ac4e-ecd4856d4397")
 			(effects
 				(font
