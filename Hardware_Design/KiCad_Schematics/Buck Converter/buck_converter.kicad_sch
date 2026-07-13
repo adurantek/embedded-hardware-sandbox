@@ -329,6 +329,56 @@
 			(embedded_fonts no)
 		)
 	)
+	(wire
+		(pts
+			(xy 176.53 107.95) (xy 181.61 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0900ca30-763f-4010-9ed4-f835c22a1fbe")
+	)
+	(wire
+		(pts
+			(xy 176.53 113.03) (xy 181.61 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72c3144d-855f-4bc6-877a-ec22ece28bee")
+	)
+	(wire
+		(pts
+			(xy 176.53 97.79) (xy 181.61 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af131667-ba35-423e-a039-4122545d7096")
+	)
+	(wire
+		(pts
+			(xy 176.53 102.87) (xy 181.61 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2f30857-6ba3-41b2-b992-8eea3071bd59")
+	)
+	(label "DC"
+		(at 125.73 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08af1ad5-78dc-4c76-a573-945909aced5d")
+	)
 	(label "GND"
 		(at 81.28 99.06 0)
 		(effects
@@ -349,15 +399,45 @@
 		)
 		(uuid "389af178-7627-4510-a7c7-609fe05d8f5a")
 	)
-	(label "GND"
-		(at 110.49 116.84 270)
+	(label "SOURCE"
+		(at 81.28 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3d9aea7c-36ea-4964-87af-04c12cea250a")
+	)
+	(label "SOURCE"
+		(at 95.25 135.89 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "3e0015cb-aa9f-45f0-84f2-d1c381c4f890")
+		(uuid "6d5b3d1e-fd2c-40d9-afd6-c724ca5e7ef6")
+	)
+	(label "SOURCE"
+		(at 125.73 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6e67ee3c-4a8f-4650-99da-06fad01fe3fd")
+	)
+	(label "GATE"
+		(at 95.25 130.81 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "895f53c3-2000-4169-93ea-001bdcea5bb8")
 	)
 	(label "DC"
 		(at 81.28 96.52 0)
@@ -379,16 +459,6 @@
 		)
 		(uuid "8e332d4a-7fab-4d6d-b0c5-10c716da08db")
 	)
-	(label "GND"
-		(at 81.28 113.03 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9a1bf331-64fe-4f3b-81ef-5ed202bb4aed")
-	)
 	(label "OUTPUT"
 		(at 125.73 104.14 0)
 		(effects
@@ -398,6 +468,16 @@
 			(justify left bottom)
 		)
 		(uuid "9b82b0ed-e1f7-4bb6-91dd-7a18ba50f562")
+	)
+	(label "PULSE"
+		(at 125.73 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ae73337e-d3e6-43c1-bf8e-5f3b1174abd1")
 	)
 	(label "DC"
 		(at 95.25 101.6 180)
@@ -409,15 +489,25 @@
 		)
 		(uuid "afdf7f2e-d355-4137-a605-0581b6b7d7cf")
 	)
-	(label "PULSE"
-		(at 95.25 106.68 180)
+	(label "GND"
+		(at 95.25 115.57 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "e3a597fc-5216-4b5d-a559-bfb460e8250a")
+		(uuid "c3c47531-8a8a-4e85-99ca-2657bb52c65f")
+	)
+	(label "GATE"
+		(at 125.73 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f3875035-8198-4426-8727-222c3ec906c7")
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
@@ -695,6 +785,46 @@
 				(justify left top)
 			)
 		)
+		(pin "SIMGATE" input
+			(at 181.61 97.79 180)
+			(uuid "e253fec1-e267-4bac-9dd5-ecf773d69968")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SIMPULSE" input
+			(at 181.61 113.03 180)
+			(uuid "01fb7d85-9507-4d5b-b4d1-2b0feb622254")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SIMSOURCE" input
+			(at 181.61 102.87 180)
+			(uuid "2b05f27e-064a-4f4a-87a9-0ce7f1fbcafd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SIMVCC" input
+			(at 181.61 107.95 180)
+			(uuid "347f5d96-2dff-435b-9563-5f2d372e593c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
@@ -742,6 +872,46 @@
 				(justify left top)
 			)
 		)
+		(pin "SIMGATE" output
+			(at 176.53 97.79 0)
+			(uuid "f61d8bbb-85c5-4ec1-89bc-3aa076aa841b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SIMSOURCE" output
+			(at 176.53 102.87 0)
+			(uuid "6950dcd9-9a91-4ea8-8f2c-55599181042e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SIMVCC" output
+			(at 176.53 107.95 0)
+			(uuid "ad820be8-a51b-4987-93ef-7cd7dc01c2af")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SIMPULSE" output
+			(at 176.53 113.03 0)
+			(uuid "f57fa3c3-66e1-4ef4-93f0-296e0bff19ee")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230"
@@ -751,7 +921,7 @@
 		)
 	)
 	(sheet
-		(at 95.25 124.46)
+		(at 95.25 125.73)
 		(size 30.48 22.86)
 		(exclude_from_sim yes)
 		(in_bom no)
@@ -767,7 +937,7 @@
 		)
 		(uuid "99839e64-c2cf-4e0f-8bc6-cadc19dd91e8")
 		(property "Sheetname" "Bootstrap Driver"
-			(at 95.25 123.7484 0)
+			(at 95.25 125.0184 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -778,7 +948,7 @@
 			)
 		)
 		(property "Sheetfile" "bootstrap.kicad_sch"
-			(at 95.25 147.9046 0)
+			(at 95.25 149.1746 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -789,7 +959,7 @@
 			)
 		)
 		(pin "GATE" output
-			(at 95.25 129.54 180)
+			(at 95.25 130.81 180)
 			(uuid "6511a55e-9938-4356-8b66-dc8cabb8ccef")
 			(effects
 				(font
@@ -799,7 +969,7 @@
 			)
 		)
 		(pin "SOURCE" output
-			(at 95.25 134.62 180)
+			(at 95.25 135.89 180)
 			(uuid "ca2089f5-651f-4e44-8601-5db674520dad")
 			(effects
 				(font
@@ -809,7 +979,7 @@
 			)
 		)
 		(pin "VCC" input
-			(at 125.73 129.54 0)
+			(at 125.73 130.81 0)
 			(uuid "2e5af409-8060-4206-90b1-69b28feb311e")
 			(effects
 				(font
@@ -819,7 +989,7 @@
 			)
 		)
 		(pin "VPULSE+" input
-			(at 125.73 134.62 0)
+			(at 125.73 135.89 0)
 			(uuid "e8a4f498-e6f1-4279-bc8a-88571c3574ab")
 			(effects
 				(font
@@ -894,19 +1064,29 @@
 				(justify right)
 			)
 		)
-		(pin "PULSE" input
-			(at 95.25 106.68 180)
-			(uuid "87d552ec-34c8-404b-9ce1-6147a0459070")
+		(pin "GATE" input
+			(at 125.73 111.76 0)
+			(uuid "5cac70e5-6b1c-4be0-a222-73e34c1db9aa")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
+			)
+		)
+		(pin "SOURCE" input
+			(at 125.73 114.3 0)
+			(uuid "9c3dde6e-991a-46bf-9340-fc54542fc290")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(pin "GND" passive
-			(at 110.49 116.84 270)
-			(uuid "c975481a-770a-4e07-ac4e-ecd4856d4397")
+			(at 95.25 115.57 180)
+			(uuid "c481d617-9d40-4477-a281-735cbfe3adb9")
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -1169,7 +1169,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3c585442-6b89-4fda-8258-45416faa2c8e")
-		(property "Reference" "D_BOOT"
+		(property "Reference" "D_BOOT2"
 			(at 128.778 57.912 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1233,7 +1233,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "D_BOOT")
+					(reference "D_BOOT2")
 					(unit 1)
 				)
 			)
@@ -1250,7 +1250,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6470ad91-f72a-4df7-abfa-fdbe67224437")
-		(property "Reference" "Q4"
+		(property "Reference" "Q5"
 			(at 109.22 66.548 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1342,7 +1342,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "Q4")
+					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -1359,7 +1359,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "79fdaeea-09ed-48e5-acc0-add68aa29b06")
-		(property "Reference" "R_BASE"
+		(property "Reference" "R_BASE2"
 			(at 102.87 71.628 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1421,7 +1421,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "R_BASE")
+					(reference "R_BASE2")
 					(unit 1)
 				)
 			)
@@ -1438,7 +1438,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8a9ce932-8c31-410b-8827-910c08ede421")
-		(property "Reference" "R_GATE"
+		(property "Reference" "R_GATE2"
 			(at 121.92 81.788 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1449,8 +1449,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1k"
-			(at 119.38 82.804 0)
+		(property "Value" "10"
+			(at 124.46 83.566 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1502,7 +1502,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "R_GATE")
+					(reference "R_GATE2")
 					(unit 1)
 				)
 			)
@@ -1519,7 +1519,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b0daf6cc-08fd-4fd0-87ba-064dfe90d973")
-		(property "Reference" "C_BOOT"
+		(property "Reference" "C_BOOT2"
 			(at 118.364 67.056 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1581,7 +1581,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "C_BOOT")
+					(reference "C_BOOT2")
 					(unit 1)
 				)
 			)
@@ -1598,7 +1598,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ba2cde02-eacc-44c8-8c34-9b2ab371eada")
-		(property "Reference" "Q3"
+		(property "Reference" "Q6"
 			(at 128.778 72.644 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1690,7 +1690,7 @@
 		(instances
 			(project "buck_converter"
 				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/99839e64-c2cf-4e0f-8bc6-cadc19dd91e8"
-					(reference "Q3")
+					(reference "Q6")
 					(unit 1)
 				)
 			)

@@ -1689,6 +1689,16 @@
 	)
 	(wire
 		(pts
+			(xy 151.13 85.09) (xy 127 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "287bb1fd-674e-466b-b270-c7cc9373b5e2")
+	)
+	(wire
+		(pts
 			(xy 143.51 91.44) (xy 134.62 91.44)
 		)
 		(stroke
@@ -1696,6 +1706,36 @@
 			(type default)
 		)
 		(uuid "3f48ff7d-fd0b-4da2-bb9d-f30b6e11b9b4")
+	)
+	(wire
+		(pts
+			(xy 127 85.09) (xy 127 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4eeb8e18-095e-4c62-bc41-3e6a81f6797f")
+	)
+	(wire
+		(pts
+			(xy 121.92 119.38) (xy 151.13 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71f84957-598e-4727-b8c7-0c8b1513c284")
+	)
+	(wire
+		(pts
+			(xy 151.13 119.38) (xy 151.13 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a679d987-6382-4e69-b06d-da9061b46688")
 	)
 	(label "VOUT"
 		(at 143.51 91.44 0)
@@ -1706,6 +1746,50 @@
 			(justify left bottom)
 		)
 		(uuid "e8ede3ad-6706-4a0a-9c52-8ff999cd2a50")
+	)
+	(hierarchical_label "SIMSOURCE"
+		(shape output)
+		(at 127 91.44 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2d1c9aa8-870f-4eb9-8e6f-0c009f9c613b")
+	)
+	(hierarchical_label "SIMPULSE"
+		(shape output)
+		(at 121.92 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "600a7088-bb03-4865-8ec3-58b5903c4d22")
+	)
+	(hierarchical_label "SIMVCC"
+		(shape output)
+		(at 116.84 91.44 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7f0b3c28-487c-4fc2-aabe-16cfb0ed9d2a")
+	)
+	(hierarchical_label "SIMGATE"
+		(shape output)
+		(at 121.92 99.06 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d8796210-4eac-4bd2-88c4-95be60664bc9")
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -1813,6 +1897,7 @@
 		)
 		(property "Value" "0"
 			(at 106.68 88.9 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2064,7 +2149,7 @@
 	)
 	(symbol
 		(lib_id "Simulation_SPICE:VPULSE")
-		(at 121.92 104.14 0)
+		(at 121.92 114.3 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2074,7 +2159,7 @@
 		(dnp no)
 		(uuid "59815f51-c91e-46f2-9022-caaac57e9893")
 		(property "Reference" "V2"
-			(at 107.188 108.458 0)
+			(at 107.188 118.618 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2085,7 +2170,7 @@
 			)
 		)
 		(property "Value" "VPULSE"
-			(at 105.156 110.236 0)
+			(at 105.156 120.396 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2096,7 +2181,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2107,7 +2192,7 @@
 			)
 		)
 		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2118,7 +2203,7 @@
 			)
 		)
 		(property "Description" "Voltage source, pulse"
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2129,7 +2214,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=+ 2=-"
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2140,7 +2225,7 @@
 			)
 		)
 		(property "Sim.Type" "PULSE"
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2151,7 +2236,7 @@
 			)
 		)
 		(property "Sim.Device" "V"
-			(at 121.92 104.14 0)
+			(at 121.92 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2162,8 +2247,8 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=6 td=0 tr=10n tf=10n tw=2.5u per=5u"
-			(at 103.632 112.522 0)
+		(property "Sim.Params" "y1=0 y2=12 td=100u tr=10n tf=10n tw=2.5u per=5u"
+			(at 103.632 122.682 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2295,6 +2380,7 @@
 		)
 		(property "Value" "PWR_FLAG"
 			(at 106.68 86.36 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2682,6 +2768,7 @@
 		)
 		(property "Value" "0"
 			(at 127 96.52 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2760,6 +2847,7 @@
 		)
 		(property "Value" "0"
 			(at 143.51 96.52 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2838,6 +2926,7 @@
 		)
 		(property "Value" "0"
 			(at 116.84 96.52 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2893,84 +2982,6 @@
 	)
 	(symbol
 		(lib_id "Simulation_SPICE:0")
-		(at 121.92 109.22 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cfdf8485-eba9-4343-9fce-29c56048dd2c")
-		(property "Reference" "#GND06"
-			(at 121.92 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0"
-			(at 121.92 106.68 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 121.92 109.22 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#subsec_Circuit_elements__device"
-			(at 121.92 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "0V reference potential for simulation"
-			(at 121.92 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a0bdcf70-4590-4d81-9598-02e3edeb25a5")
-		)
-		(instances
-			(project "buck_converter"
-				(path "/e6ad1407-9765-4ff4-965d-dd4ca2472230/73cf55f2-6ad2-4256-9459-c6c839187002"
-					(reference "#GND06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:0")
 		(at 134.62 99.06 0)
 		(unit 1)
 		(body_style 1)
@@ -2994,6 +3005,7 @@
 		)
 		(property "Value" "0"
 			(at 134.62 96.52 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
