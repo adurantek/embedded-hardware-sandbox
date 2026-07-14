@@ -46,3 +46,9 @@ fp-info-cache
 *.exe
 *.o
 *.obj
+
+# for LTSpice
+
+*.log
+*.net
+*.raw
