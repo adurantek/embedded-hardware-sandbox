@@ -22,13 +22,13 @@
 
 | Pin | Function | MODE |
 |-----|----------|------|
-| PA1 | LED1 | INPUT |
-| PA2 | LED2 | INPUT |
-| PA3 | LED3 | INPUT |
-| PA4 | LED4 | INPUT |
-| PA5 | LED5 | INPUT |
-| PA6 | Button 1 (EXTI) | OUTPUT |
-| PA7 | Button 2 (EXTI) | OUTPUT |
+| PA1 | LED1 | OUTPUT |
+| PA2 | LED2 | OUTPUT |
+| PA3 | LED3 | OUTPUT |
+| PA4 | LED4 | OUTPUT |
+| PA5 | LED5 | OUTPUT |
+| PA6 | Button 1 (EXTI) | INPUT |
+| PA7 | Button 2 (EXTI) | INPUT |
 
 ## Purpose
 
