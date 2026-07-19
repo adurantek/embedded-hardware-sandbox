@@ -25,7 +25,7 @@
 
 ## Purpose
 
-Bu çalışma sadece Timer-Interrupt mimarisini anlamak-öğrenmek-pekiştirmek için yapılmıştır.
+This study was conducted only to understand-learn-reinforce the Timer-Interrupt architecture.
 
 ### Registers Used
 
@@ -37,13 +37,13 @@ Bu çalışma sadece Timer-Interrupt mimarisini anlamak-öğrenmek-pekiştirmek 
 
 ## Learning Outcomes
 
-- ✅ Timer-Interrupt mimarisi kavranıldı.
+- ✅ Timer-Interrupt architecture was grasped.
 
 ## Technical Details
 
 ### Registers Describe
 
-`RCC` ile `TIM3` ve A portu açıldı. `DMA` kullanılarak Timer-Interrupt aktif edildi. `PSC` ve `ARR` ile frekans düşürme ve zamanlama ayarları yapıldı. `SR` registerını kontrol ederek zaman dolduğunda kesme aktif ediliyor ve `led_status` değişkeni değiştiriliyor. Daha sonra `SR` registerı resetleniyor. `CRT` ile zamanlayıcı başlatılıyor. `while` döngüsü içinde sadece `if` bloğu ile `toggle` kullanılarak LED'in saniyede 1 yanıp sönmesi sağlanıyor.
+With `RCC`, `TIM3` and port A were opened. Timer-Interrupt was activated using `DMA`. Frequency reduction and timing settings were made with `PSC` and `ARR`. By checking the `SR` register, the interrupt is activated when the time is up and the `led_status` variable is changed. Then the `SR` register is reset. The timer is started with `CRT`. Inside the `while` loop, it is ensured that the LED blinks 1 time per second by using `toggle` only with the `if` block.
 
 ### Components list
     
