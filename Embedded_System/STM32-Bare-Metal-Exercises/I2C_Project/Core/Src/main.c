@@ -43,13 +43,25 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 	I2C1 -> CR2 |= (1 << 14); //STOP
 }
 
+void clear_pixels() {
+	uint8_t clear_list[129];
+	clear_list[0] = 0x40;
+
+	for (uint8_t i=1;i<129;i++) {
+		clear_list[i] = 0x00;
+	}
+
+	for (uint8_t j=0;j<8;j++) {
+		I2C_Write_Byte(clear_list,0x3C,129);
+	}
+}
+
 int main (void) {
 	setup();
 
 	//OLED SCREEN ADRESSES
 
 	uint8_t oled_init_cmd[27] = {
-
 		0x00,       // KONTROL BAYTI
 	    0xAE,       // (Display OFF)
 	    0xD5, 0x80, // CLOCK FREQUENCY CONFIG
@@ -73,15 +85,19 @@ int main (void) {
 
 	//OLED OFF CODE 0XAE
 
-	uint8_t pixel_verisi[101];
+	clear_pixels();
 
+	uint8_t pixel_verisi[129];
 	pixel_verisi[0] = 0x40; //CONTROL BYTE
 
-	for (uint8_t i=1;i<101;i++) {
-		pixel_verisi[i] = 0xFF; //0xFF PIXELS
+	for (uint8_t i=1;i<129;i++) {
+		pixel_verisi[i] = 0xFF; //0xFF PIXELS WHITE
 	}
 
-	I2C_Write_Byte(pixel_verisi, 0x3C, 101);
+	for(uint8_t j=0;j<8;j++) {
+		I2C_Write_Byte(pixel_verisi, 0x3C, 129);
+	}
+
 
 	while (1) {}
 }
