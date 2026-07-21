@@ -46,10 +46,42 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 int main (void) {
 	setup();
 
-	//OLED OFF CODE 0XAE
-	uint8_t test_verisi[2] = {0x00,0xAE};
+	//OLED SCREEN ADRESSES
 
-	I2C_Write_Byte(test_verisi, 0x3C, 2);
+	uint8_t oled_init_cmd[27] = {
+
+		0x00,       // KONTROL BAYTI
+	    0xAE,       // (Display OFF)
+	    0xD5, 0x80, // CLOCK FREQUENCY CONFIG
+	    0xA8, 0x3F, // MULTIPLEX CONFIG (64 SATIR ICIN)
+	    0xD3, 0x00, // SCREEN MOVEMENT RESET
+	    0x40,       // BASLANGIC SATIRINI 0 YAP
+	    0x8D, 0x14, // ŞARJ POMPASINI AC
+	    0x20, 0x00, // HAFIZA ADRESLEME MODUNU 'YATAY' (Horizontal) YAP
+	    0xA1,       // SUTUN ADRSLERINI TERS CEVIR (EKRAN TERS DURMASIN DIYE)
+	    0xC8,       // SATIR TARAMA YONUNU TER CEVIR
+	    0xDA, 0x12, // HARDWARE PIN CONFIGURATION
+	    0x81, 0xCF, // KONTRAST CONGIG
+	    0xD9, 0xF1, // PRE-CHARGE PERIOD
+	    0xDB, 0x40, // VCOMH VOLTAGE LEVEL
+	    0xA4,       // ALL PIXELS CONNECT TO RAM
+	    0xA6,       // NORMAL GORUNUM (SIYAH ARKA PLAN, BYAZ YAZI)
+	    0xAF        // EKRANI AÇ (Display ON)
+	};
+
+	I2C_Write_Byte(oled_init_cmd, 0x3C, 27);
+
+	//OLED OFF CODE 0XAE
+
+	uint8_t pixel_verisi[101];
+
+	pixel_verisi[0] = 0x40; //CONTROL BYTE
+
+	for (uint8_t i=1;i<101;i++) {
+		pixel_verisi[i] = 0xFF; //0xFF PIXELS
+	}
+
+	I2C_Write_Byte(pixel_verisi, 0x3C, 101);
 
 	while (1) {}
 }
