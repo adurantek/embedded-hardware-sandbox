@@ -188,6 +188,13 @@ void OLED_Open() {
 	I2C_Write_Byte(oled_init_cmd, 0x3C, 27);
 }
 
+void OLED_Print(char *str) {
+	while (*str) {
+		OLED_PutChar(*str);
+		str++;
+	}
+}
+
 int main (void) {
 	setup();
 
@@ -195,7 +202,7 @@ int main (void) {
 
 	clear_pixels();
 
-	OLED_PutChar('X');
+	OLED_Print("EINDHOVEN");
 
 	while (1) {}
 }
