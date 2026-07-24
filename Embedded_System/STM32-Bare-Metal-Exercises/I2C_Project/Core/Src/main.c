@@ -164,6 +164,16 @@ void OLED_PutChar(char c) {
 	I2C_Write_Byte(charr,0x3C,7);
 }
 
+void Set_Cursor(uint8_t column, uint8_t page) {
+	uint8_t list[7] = {
+		0x00, //CONTROL (D/C# = 0) (DATASHEET)
+		0x21, column, 127, //CONFIGURE HORIZONTAL (SSD1306 DATASHEET PAGE 30)
+		0x22, page, 3 //CONFIGURE VERTICAL (SSD1306 DATASHEET PAGE 31)
+	};
+
+	I2C_Write_Byte(list,0x3C,7);
+}
+
 void OLED_Open() {
 	//OLED SCREEN ADRESSES
 	uint8_t oled_init_cmd[27] = {
@@ -200,9 +210,15 @@ int main (void) {
 
 	OLED_Open();
 
+	Set_Cursor(0,0);
+
 	clear_pixels();
 
-	OLED_Print("EINDHOVEN");
+	char text[50];
+	uint8_t value = 249;
+	sprintf(text,"EINDHOVEN POPULATION : %d k PEOPLE",value);
+
+	OLED_Print(text);
 
 	while (1) {}
 }
