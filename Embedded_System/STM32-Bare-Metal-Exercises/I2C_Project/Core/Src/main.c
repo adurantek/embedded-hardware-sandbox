@@ -101,13 +101,13 @@ const uint8_t Font5x7[] = {
 };
 
 void setup (void) {
-	RCC -> CR &= ~(1 << 12); //CONFIGURED FREQUENCY TO 48MHZ
+	RCC -> CR &= ~(1 << 12); 										//CONFIGURED FREQUENCY TO 48MHZ
 
-	RCC -> IOPENR |= (1 << 1);   // PORT B ENABLE
-	RCC -> APBENR1 |= (1 << 21); //I2C1 PERHIPRAL ENABLE
+	RCC -> IOPENR |= (1 << 1);  									//PORT B ENABLE
+	RCC -> APBENR1 |= (1 << 21); 									//I2C1 PERHIPRAL ENABLE
 
-	GPIOB -> MODER &= ~((1 << 16) | (1 << 18)); //PA8 AND PA9 AF ENABLE
-	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   //OPEN-DRAİN ENABLE
+	GPIOB -> MODER &= ~((1 << 16) | (1 << 18)); 					//PB8 AND PB9 AF ENABLE
+	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
 	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE
 
 	//100Khz for 48Mhz Table 115.
@@ -118,20 +118,20 @@ void setup (void) {
 					|  (0x2 << 16)    //SDADEL
 					|  (0x4 << 20));  //SCLDEL
 
-	I2C1 -> CR1 |= (1 << 0);	 //PERHIPRAL ENABLE
+	I2C1 -> CR1 |= (1 << 0);	 	  //PERHIPRAL ENABLE
 
 }
 
 void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
-	I2C1 -> CR2	=     ((adres << 1) //SADD
-				    |  (size << 16)    //NBYTE (1 byte)
-					|  (1 << 13));  //START
+	I2C1 -> CR2	=     ((adres << 1)  //SADD
+				    |  (size << 16)  //NBYTE (1 byte)
+					|  (1 << 13));   //START
 
 	// NOTE: READ/WRİTE 0 DEFAULT
 
 	for (uint8_t i=0; i < size; i++) {
 
-	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL*/ { }
+	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL*/ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 
 	I2C1 -> TXDR = data_array[i];
 
@@ -166,9 +166,9 @@ void OLED_PutChar(char c) {
 
 void Set_Cursor(uint8_t column, uint8_t page) {
 	uint8_t list[7] = {
-		0x00, //CONTROL (D/C# = 0) (DATASHEET)
-		0x21, column, 127, //CONFIGURE HORIZONTAL (SSD1306 DATASHEET PAGE 30)
-		0x22, page, 3 //CONFIGURE VERTICAL (SSD1306 DATASHEET PAGE 31)
+		0x00, 				//CONTROL (D/C# = 0) (DATASHEET)
+		0x21, column, 127,  //CONFIGURE HORIZONTAL (SSD1306 DATASHEET PAGE 30)
+		0x22, page, 3 		//CONFIGURE VERTICAL (SSD1306 DATASHEET PAGE 31)
 	};
 
 	I2C_Write_Byte(list,0x3C,7);
@@ -207,7 +207,7 @@ void OLED_Print(char *str) {
 
 int main (void) {
 	setup();
-
+	
 	OLED_Open();
 
 	Set_Cursor(0,0);
@@ -216,7 +216,7 @@ int main (void) {
 
 	char text[50];
 	uint8_t value = 249;
-	sprintf(text,"EINDHOVEN POPULATION : %d k PEOPLE",value);
+	sprintf(text,"EINDHOVEN POPULATION : %d k PEOPLE",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
 
 	OLED_Print(text);
 
