@@ -1,5 +1,11 @@
+#include <stdint.h>
 #include <stdio.h>
+#include <sys/_intsup.h>
+#include "stm32c031xx.h"
 #include "stm32c0xx.h"
+
+uint8_t read_value1;
+uint8_t read_value;
 
 const uint8_t Font5x7[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00,// (space)
@@ -121,23 +127,34 @@ void setup (void) {
 
 }
 
-void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
-	I2C1 -> CR2	=     ((adres << 1)  //SADD (SENSOR ADDRESS)
-				    |  (size << 16)  //NBYTE (1 byte)
-					|  (1 << 13));   //START
-
-	// NOTE: READ/WRİTE 0 DEFAULT
-
-	for (uint8_t i=0; i < size; i++) {
-
-	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL*/ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
-
-	I2C1 -> TXDR = data_array[i];
-
+uint8_t BMP180_Read_Byte(void) {
+	I2C1 -> CR2 =	 ((0x77 << 1)  //SADD (BMP180 ADDRESS)
+				    |  (1 << 16)   //NBYTE (1 byte)
+					|  (1 << 13)); //START
+	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	I2C1 -> TXDR = 0xD0;
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1 -> CR2 = 	((0x77 << 1)  //SADD (BMP180 ADRESS)
+					| (1 << 16)   //NBYTES (1 Byte)
+					| (1 << 10)   //READ MODE
+					| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { } //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	read_value = I2C1->RXDR;
+	I2C1->CR2 |= (1 << 14); //STOP
+	return read_value; 
 	}
 
-	while((I2C1 -> ISR & (1 << 6)) == 0) /*COMPLETE FLAG CONTROL*/ { }
-
+void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
+	I2C1 -> CR2	=     ((adres << 1)  //SADD (SENSOR ADDRESS)
+				    |  (size << 16)  //NBYTE (size byte)
+					|  (1 << 13));   //START
+	// NOTE: READ/WRİTE 0 DEFAULT
+	
+	for (uint8_t i=0; i < size; i++) {
+	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	I2C1 -> TXDR = data_array[i];
+	}
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
 	I2C1 -> CR2 |= (1 << 14); //STOP
 }
 
@@ -210,10 +227,12 @@ int main (void) {
 	Set_Cursor(0,0);
 	clear_pixels();
 	
+	read_value1 = BMP180_Read_Byte();
+	
 	char text[50];
-	uint8_t value = 249;
-	sprintf(text,"EINDHOVEN POPULATION : %d k PEOPLE",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
-
+	uint8_t value = read_value1;
+	sprintf(text,"Read Value : %x",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
+	
 	OLED_Print(text);
 
 	while (1) {}
