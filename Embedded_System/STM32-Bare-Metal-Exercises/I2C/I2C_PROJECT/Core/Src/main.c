@@ -138,8 +138,8 @@ uint8_t BMP180_Read_Byte(void) {
 					| (1 << 16)   //NBYTES (1 Byte)
 					| (1 << 10)   //READ MODE
 					| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { } //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-	read_value = I2C1->RXDR;
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
 	I2C1->CR2 |= (1 << 14); //STOP
 	return read_value; 
 	}
@@ -173,7 +173,7 @@ void clear_pixels() {
 
 void OLED_PutChar(char c) {
 	uint16_t index = (c - 32)*5;
-	uint8_t charr[7]; 													// 1 CONTROL BYTE + 5 FONT BYTES + 1 SPACE BYTE
+	uint8_t charr[7]; 													//1 CONTROL BYTE + 5 FONT BYTES + 1 SPACE BYTE
 	charr[0] = 0x40;
 	for (uint8_t i=1;i<6;i++) { charr[i] = Font5x7[index + (i - 1)]; }
 	charr[6] = 0x00; 													//SPACE BETWEEN CHARACTERS
