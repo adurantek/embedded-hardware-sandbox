@@ -4,13 +4,15 @@
 #include "stm32c031xx.h"
 #include "stm32c0xx.h"
 
-uint8_t read_value1,read_value,trigger = 0;
+uint8_t lsb, msb, read_value = 0;
+uint16_t value = 0;
+volatile uint8_t trigger = 0;
 
 const uint8_t Font5x7[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00,// (space)
 	0x00, 0x00, 0x5F, 0x00, 0x00,// !
 	0x00, 0x07, 0x00, 0x07, 0x00,// "
-	0x14, 0x7F, 0x14, 0x7F, 0x14,// #	
+	0x14, 0x7F, 0x14, 0x7F, 0x14,// #
 	0x24, 0x2A, 0x7F, 0x2A, 0x12,// $
 	0x23, 0x13, 0x08, 0x64, 0x62,// %
 	0x36, 0x49, 0x55, 0x22, 0x50,// &
@@ -106,12 +108,14 @@ const uint8_t Font5x7[] = {
 };
 
 void setup (void) {
-	RCC -> CR &= ~(1 << 12); 										//CONFIGURED FREQUENCY TO 48MHZ
+	RCC -> CR &= ~(7 << 11);  //CONFIGURED FREQUENCY TO 48MHZ
 
 	RCC -> IOPENR |= (1 << 1);  									//PORT B ENABLE
 	RCC -> APBENR1 |= (1 << 21);									//I2C1 PERHIPRAL ENABLE
-	RCC -> APBENR1 |= (1 << 2);								        //TIM3 PERHIPRAL ENABLE						
-	
+	RCC -> APBRSTR1 |= (1 << 21);									//I2C1 PERHIPRAL RESET
+	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
+	RCC -> APBENR1 |= (1 << 1);								        //TIM3 PERHIPRAL ENABLE
+
 	GPIOB -> MODER &= ~((1 << 16) | (1 << 18)); 					//PB8 AND PB9 AF ENABLE
 	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
 	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE (DATASHEET PAGE 37)
@@ -125,12 +129,12 @@ void setup (void) {
 					|  (0x4 << 20));  //SCLDEL
 
 	I2C1 -> CR1 |= (1 << 0);	 	  //PERHIPRAL ENABLE
-	
+
 
 	//TIMER CONFIGURATION FOR 1HZ INTERRUPT
 	TIM3 -> CNT = 0; 				  //COUNTER RESET
 	TIM3 -> PSC = 48000 - 1; 		  //PRESCALER (48MHZ / 48000 = 1KHZ)
-	TIM3 -> ARR = 4.5 - 1; 		 	  //AUTO RELOAD REGISTER (1KHZ / 4.5 = 222.22HZ)
+	TIM3 -> ARR = 7 - 1; 		 	  //AUTO RELOAD REGISTER (1KHZ / 4.5 = 222.22HZ)
 
 	//TIMER INTERRUPT CONFIGURATION
 	TIM3 -> DIER |= (1 << 0); 		  //UPDATE INTERRUPT
@@ -149,7 +153,7 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 				    |  (size << 16)  //NBYTE (size byte)
 					|  (1 << 13));   //START
 	// NOTE: READ/WRİTE 0 DEFAULT
-	
+
 	for (uint8_t i=0; i < size; i++) {
 	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1 -> TXDR = data_array[i];
@@ -209,22 +213,22 @@ uint8_t BMP180_Read_Byte(void) {
 	I2C1 -> CR2 =	 ((0x77 << 1)  //SADD (BMP180 ADDRESS)
 				    |  (1 << 16)   //NBYTE (1 byte)
 					|  (1 << 13)); //START
-	
+
 	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1 -> TXDR = 0xD0;
-	
+
 	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
-	
+
 	I2C1 -> CR2 = 	((0x77 << 1)  //SADD (BMP180 ADRESS)
 					| (1 << 16)   //NBYTES (1 Byte)
 					| (1 << 10)   //READ MODE
 					| (1 << 13)); //START
-	
+
 	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-	
+
 	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
 	I2C1->CR2 |= (1 << 14); //STOP
-	return read_value; 
+	return read_value;
 }
 
 void OLED_PutChar(char c) {
@@ -245,55 +249,50 @@ void OLED_Print(char *str) {
 
 void BMP180_Read_16Bit(void) {
 	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
-				| (3 << 16)   //NBYTE (4 byte)
+				| (2 << 16)   //NBYTE (2 byte)
 				| (1 << 13)); //START
 	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0xF4; 				  //WRITE REGISTER ADDRESS (BMP180 DATASHEET PAGE 21 TABLE 8)
-	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0x2E; 				  //CONTROL REGISTER VALUE (BMP180 DATASHEET PAGE 21 TABLE 8)
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 |= (1 << 14);
 	TIM3->CR1 |= (1 << 0); 		      //TIMER ENABLE
 	while(trigger == 0) { } 		  //WAIT UNTIL TRIGGER FLAG IS SET (1/222.22HZ = 4.5ms)
-	
-	//LSB
-	I2C1->TXDR = 0xF7;
-	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
-	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
-				| (1 << 16)   //NBYTE (4 byte)
-				| (1 << 10)   //READ MODE
-				| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
-	uint8_t lsb_value = I2C1->RXDR;
-	
-	//MSB
-	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
-				| (1 << 16)   //NBYTE (4 byte)
-				| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET	
-	I2C1->TXDR = 0xF6; //MSB
-	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
-	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
-				| (1 << 16)   //NBYTE (4 byte)
-				| (1 << 10)   //READ MODE
-				| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
-	uint8_t lsb_value = I2C1->RXDR;
+	trigger = 0;					  //TRIGGER FLAG RESET
+	TIM3->CR1 &= ~(1 << 0);			  //TIMER DISABLE
 
+	//LSB AND MSB READ
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (1 byte)
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	I2C1->TXDR = 0xF6;
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (2 << 16)   //NBYTE (2 byte)
+				| (1 << 10)   //READ MODE
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	msb = I2C1->RXDR;
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	lsb = I2C1->RXDR;
+	I2C1->CR2 |= (1 << 14); //STOP
+
+	value = (msb << 8) | lsb; //COMBINE MSB AND LSB
 }
 
 int main (void) {
 	setup();
 	OLED_Open();
-	Set_Cursor(0,0);
 	clear_pixels();
-	
-	read_value1 = BMP180_Read_Byte();
-	
+
+	BMP180_Read_16Bit();
+
 	char text[50] = {0};
-	uint8_t value = read_value1;
 	sprintf(text,"Read Value : %x",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
-	
+
+	Set_Cursor(0,0);
 	OLED_Print(text);
 
 	while (1) {}
