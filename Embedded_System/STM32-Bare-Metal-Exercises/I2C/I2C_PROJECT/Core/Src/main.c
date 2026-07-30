@@ -4,14 +4,14 @@
 #include "stm32c031xx.h"
 #include "stm32c0xx.h"
 
-uint8_t read_value1;
-uint8_t read_value;
+uint8_t read_value1,read_value,trigger = 0;
 
 const uint8_t Font5x7[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00,// (space)
 	0x00, 0x00, 0x5F, 0x00, 0x00,// !
 	0x00, 0x07, 0x00, 0x07, 0x00,// "
-	0x14, 0x7F, 0x14, 0x7F, 0x14,// #	0x24, 0x2A, 0x7F, 0x2A, 0x12,// $
+	0x14, 0x7F, 0x14, 0x7F, 0x14,// #	
+	0x24, 0x2A, 0x7F, 0x2A, 0x12,// $
 	0x23, 0x13, 0x08, 0x64, 0x62,// %
 	0x36, 0x49, 0x55, 0x22, 0x50,// &
 	0x00, 0x05, 0x03, 0x00, 0x00,// '
@@ -109,8 +109,9 @@ void setup (void) {
 	RCC -> CR &= ~(1 << 12); 										//CONFIGURED FREQUENCY TO 48MHZ
 
 	RCC -> IOPENR |= (1 << 1);  									//PORT B ENABLE
-	RCC -> APBENR1 |= (1 << 21); 									//I2C1 PERHIPRAL ENABLE
-
+	RCC -> APBENR1 |= (1 << 21);									//I2C1 PERHIPRAL ENABLE
+	RCC -> APBENR1 |= (1 << 2);								        //TIM3 PERHIPRAL ENABLE						
+	
 	GPIOB -> MODER &= ~((1 << 16) | (1 << 18)); 					//PB8 AND PB9 AF ENABLE
 	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
 	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE (DATASHEET PAGE 37)
@@ -124,25 +125,24 @@ void setup (void) {
 					|  (0x4 << 20));  //SCLDEL
 
 	I2C1 -> CR1 |= (1 << 0);	 	  //PERHIPRAL ENABLE
+	
 
+	//TIMER CONFIGURATION FOR 1HZ INTERRUPT
+	TIM3 -> CNT = 0; 				  //COUNTER RESET
+	TIM3 -> PSC = 48000 - 1; 		  //PRESCALER (48MHZ / 48000 = 1KHZ)
+	TIM3 -> ARR = 4.5 - 1; 		 	  //AUTO RELOAD REGISTER (1KHZ / 4.5 = 222.22HZ)
+
+	//TIMER INTERRUPT CONFIGURATION
+	TIM3 -> DIER |= (1 << 0); 		  //UPDATE INTERRUPT
+	NVIC_EnableIRQ(TIM3_IRQn);   //NVIC ENABLE
 }
 
-uint8_t BMP180_Read_Byte(void) {
-	I2C1 -> CR2 =	 ((0x77 << 1)  //SADD (BMP180 ADDRESS)
-				    |  (1 << 16)   //NBYTE (1 byte)
-					|  (1 << 13)); //START
-	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
-	I2C1 -> TXDR = 0xD0;
-	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
-	I2C1 -> CR2 = 	((0x77 << 1)  //SADD (BMP180 ADRESS)
-					| (1 << 16)   //NBYTES (1 Byte)
-					| (1 << 10)   //READ MODE
-					| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
-	I2C1->CR2 |= (1 << 14); //STOP
-	return read_value; 
+void TIM3_IRQHandler(void) {
+	if (TIM3 -> SR & (1 << 0)) {  //UPDATE INTERRUPT FLAG CONTROL
+		trigger = 1;
+		TIM3 -> SR &= ~(1 << 0); //UPDATE INTERRUPT FLAG RESET
 	}
+}
 
 void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 	I2C1 -> CR2	=     ((adres << 1)  //SADD (SENSOR ADDRESS)
@@ -156,38 +156,6 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 	}
 	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
 	I2C1 -> CR2 |= (1 << 14); //STOP
-}
-
-void clear_pixels() {
-	uint8_t clear_list[129];  											// 1 CONTROL BYTE + 128 PIXELS
-	clear_list[0] = 0x40;     											//CONTROL BYTE (D/C# = 1) (DATASHEET)
-
-	for (uint8_t i=1;i<129;i++) {
-		clear_list[i] = 0x00; 											//PIXEL DATA (0x00 = BLACK, 0xFF = WHITE)
-	}
-
-	for (uint8_t j=0;j<8;j++) {
-		I2C_Write_Byte(clear_list,0x3C,129);
-	}
-}
-
-void OLED_PutChar(char c) {
-	uint16_t index = (c - 32)*5;
-	uint8_t charr[7]; 													//1 CONTROL BYTE + 5 FONT BYTES + 1 SPACE BYTE
-	charr[0] = 0x40;
-	for (uint8_t i=1;i<6;i++) { charr[i] = Font5x7[index + (i - 1)]; }
-	charr[6] = 0x00; 													//SPACE BETWEEN CHARACTERS
-	I2C_Write_Byte(charr,0x3C,7);
-}
-
-void Set_Cursor(uint8_t column, uint8_t page) {
-	uint8_t list[7] = {
-		0x00, 										//CONTROL (D/C# = 0) (DATASHEET)
-		0x21, column, 127,  						//CONFIGURE HORIZONTAL (SSD1306 DATASHEET PAGE 30)
-		0x22, page, 3 								//CONFIGURE VERTICAL (SSD1306 DATASHEET PAGE 31)
-	};
-
-	I2C_Write_Byte(list,0x3C,7);
 }
 
 void OLED_Open() {
@@ -214,11 +182,104 @@ void OLED_Open() {
 	I2C_Write_Byte(oled_init_cmd, 0x3C, 27);
 }
 
+void Set_Cursor(uint8_t column, uint8_t page) {
+	uint8_t list[7] = {
+		0x00, 										//CONTROL (D/C# = 0) (DATASHEET)
+		0x21, column, 127,  						//CONFIGURE HORIZONTAL (SSD1306 DATASHEET PAGE 30)
+		0x22, page, 3 								//CONFIGURE VERTICAL (SSD1306 DATASHEET PAGE 31)
+	};
+
+	I2C_Write_Byte(list,0x3C,7);
+}
+
+void clear_pixels() {
+	uint8_t clear_list[129];  											// 1 CONTROL BYTE + 128 PIXELS
+	clear_list[0] = 0x40;     											//CONTROL BYTE (D/C# = 1) (DATASHEET)
+
+	for (uint8_t i=1;i<129;i++) {
+		clear_list[i] = 0x00; 											//PIXEL DATA (0x00 = BLACK, 0xFF = WHITE)
+	}
+
+	for (uint8_t j=0;j<8;j++) {
+		I2C_Write_Byte(clear_list,0x3C,129);
+	}
+}
+
+uint8_t BMP180_Read_Byte(void) {
+	I2C1 -> CR2 =	 ((0x77 << 1)  //SADD (BMP180 ADDRESS)
+				    |  (1 << 16)   //NBYTE (1 byte)
+					|  (1 << 13)); //START
+	
+	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	I2C1 -> TXDR = 0xD0;
+	
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	
+	I2C1 -> CR2 = 	((0x77 << 1)  //SADD (BMP180 ADRESS)
+					| (1 << 16)   //NBYTES (1 Byte)
+					| (1 << 10)   //READ MODE
+					| (1 << 13)); //START
+	
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	
+	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
+	I2C1->CR2 |= (1 << 14); //STOP
+	return read_value; 
+}
+
+void OLED_PutChar(char c) {
+	uint16_t index = (c - 32)*5;
+	uint8_t charr[7]; 													//1 CONTROL BYTE + 5 FONT BYTES + 1 SPACE BYTE
+	charr[0] = 0x40;
+	for (uint8_t i=1;i<6;i++) { charr[i] = Font5x7[index + (i - 1)]; }
+	charr[6] = 0x00; 													//SPACE BETWEEN CHARACTERS
+	I2C_Write_Byte(charr,0x3C,7);
+}
+
 void OLED_Print(char *str) {
 	while (*str) {
 		OLED_PutChar(*str);
 		str++;
 	}
+}
+
+void BMP180_Read_16Bit(void) {
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (3 << 16)   //NBYTE (4 byte)
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	I2C1->TXDR = 0xF4; 				  //WRITE REGISTER ADDRESS (BMP180 DATASHEET PAGE 21 TABLE 8)
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->TXDR = 0x2E; 				  //CONTROL REGISTER VALUE (BMP180 DATASHEET PAGE 21 TABLE 8)
+	TIM3->CR1 |= (1 << 0); 		      //TIMER ENABLE
+	while(trigger == 0) { } 		  //WAIT UNTIL TRIGGER FLAG IS SET (1/222.22HZ = 4.5ms)
+	
+	//LSB
+	I2C1->TXDR = 0xF7;
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (4 byte)
+				| (1 << 10)   //READ MODE
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
+	uint8_t lsb_value = I2C1->RXDR;
+	
+	//MSB
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (4 byte)
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET	
+	I2C1->TXDR = 0xF6; //MSB
+	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (4 byte)
+				| (1 << 10)   //READ MODE
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
+	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
+	uint8_t lsb_value = I2C1->RXDR;
+
 }
 
 int main (void) {
@@ -229,7 +290,7 @@ int main (void) {
 	
 	read_value1 = BMP180_Read_Byte();
 	
-	char text[50];
+	char text[50] = {0};
 	uint8_t value = read_value1;
 	sprintf(text,"Read Value : %x",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
 	
