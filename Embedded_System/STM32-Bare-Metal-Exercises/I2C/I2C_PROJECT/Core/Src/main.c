@@ -107,6 +107,12 @@ const uint8_t Font5x7[] = {
 	0x08, 0x1C, 0x2A, 0x08, 0x08 // <- **96th
 };
 
+void delay(volatile unsigned long ms) {
+	for (volatile unsigned long i = 0; i < ms * 1000; i++) {
+		__NOP();
+	}
+}
+
 void setup (void) {
 	RCC -> CR &= ~(7 << 11);  //CONFIGURED FREQUENCY TO 48MHZ
 
@@ -116,7 +122,33 @@ void setup (void) {
 	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
 	RCC -> APBENR1 |= (1 << 1);								        //TIM3 PERHIPRAL ENABLE
 
-	GPIOB -> MODER &= ~((1 << 16) | (1 << 18)); 					//PB8 AND PB9 AF ENABLE
+	// --- I2C BUS RECOVERY (Kilitli Sensörleri Kurtarma Operasyonu) ---
+    
+    // PB8 ve PB9'u geçici olarak OUTPUT (01) yap
+    GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); 
+    GPIOB -> MODER |= ((1 << 16) | (1 << 18));
+    GPIOB -> OTYPER |= ((1 << 8) | (1 << 9)); // Open-Drain
+    
+    // SCL (PB8) pinini 9 kere salla (OLED'i uyandır)
+    for(int i=0; i<10; i++) {
+        GPIOB -> BSRR = (1 << 8);  // SCL HIGH
+        delay(1);
+        GPIOB -> BSRR = (1 << 24); // SCL LOW
+        delay(1);
+    }
+    GPIOB -> BSRR = (1 << 8);  // SCL HIGH
+    GPIOB -> BSRR = (1 << 9);  // SDA HIGH
+    delay(10);
+    
+	// -----------------------------------------------------------------
+	
+	// -----------------------------------------------------------------
+    // I2C PİNLERİNİ GERÇEKTEN ALTERNATE FUNCTION (10) YAPMAK
+    GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); // Önce tamamen sıfırla (00)
+    GPIOB -> MODER |= ((2 << 16) | (2 << 18));  // Sonra 10 (Binary 2) yazarak AF yap!
+    
+    GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   // OPEN-DRAIN ENABLE
+    GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); // SCL AND SDA ENABLE
 	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
 	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE (DATASHEET PAGE 37)
 
@@ -139,6 +171,8 @@ void setup (void) {
 	//TIMER INTERRUPT CONFIGURATION
 	TIM3 -> DIER |= (1 << 0); 		  //UPDATE INTERRUPT
 	NVIC_EnableIRQ(TIM3_IRQn);   //NVIC ENABLE
+
+	delay(1000); 					  //WAIT 1 SECOND FOR STABILIZATION
 }
 
 void TIM3_IRQHandler(void) {
@@ -155,7 +189,14 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 	// NOTE: READ/WRİTE 0 DEFAULT
 
 	for (uint8_t i=0; i < size; i++) {
-	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	while((I2C1 -> ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { 
+		if (I2C1 -> ISR & (1 << 4)) { //NACK FLAG CONTROL
+			I2C1 -> ICR |= (1 << 4); //NACK FLAG RESET
+			I2C1 -> CR2 |= (1 << 14); //STOP
+			return; //IF NACK FLAG IS SET, STOP AND RETURN
+		}
+	} //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	
 	I2C1 -> TXDR = data_array[i];
 	}
 	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
@@ -164,7 +205,7 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 
 void OLED_Open() {
 	//OLED SCREEN ADRESSES
-	uint8_t oled_init_cmd[27] = {
+	uint8_t oled_init_cmd[26] = {
 		0x00,       // CONTROL BYTE
 	    0xAE,       // (Display OFF)
 	    0xD5, 0x80, // CLOCK FREQUENCY CONFIG
@@ -183,7 +224,7 @@ void OLED_Open() {
 	    0xA6,       // NORMAL DISPLAY (0xA7 = INVERTED DISPLAY)
 	    0xAF        // ENABLE DISPLAY
 	};
-	I2C_Write_Byte(oled_init_cmd, 0x3C, 27);
+	I2C_Write_Byte(oled_init_cmd, 0x3C, 26);
 }
 
 void Set_Cursor(uint8_t column, uint8_t page) {
@@ -251,7 +292,13 @@ void BMP180_Read_16Bit(void) {
 	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
 				| (2 << 16)   //NBYTE (2 byte)
 				| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ {
+		if (I2C1->ISR & (1 << 4)) { //NACK FLAG CONTROL
+			I2C1->ICR |= (1 << 4); //NACK FLAG RESET
+			I2C1->CR2 |= (1 << 14); //STOP
+			return; //IF NACK FLAG IS SET, STOP AND RETURN
+		}
+	 } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0xF4; 				  //WRITE REGISTER ADDRESS (BMP180 DATASHEET PAGE 21 TABLE 8)
 	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0x2E; 				  //CONTROL REGISTER VALUE (BMP180 DATASHEET PAGE 21 TABLE 8)
@@ -284,6 +331,7 @@ void BMP180_Read_16Bit(void) {
 
 int main (void) {
 	setup();
+	delay(1000); //WAIT 1 SECOND FOR STABILIZATION
 	OLED_Open();
 	clear_pixels();
 
