@@ -8,6 +8,49 @@ uint8_t lsb, msb, read_value = 0;
 uint16_t value = 0;
 volatile uint8_t trigger = 0;
 
+void IntToHexStr(uint16_t num, char* str) {
+
+    const char hex_digits[] = "0123456789ABCDEF"; 
+    
+    str[0] = '0';
+    str[1] = 'x';
+
+    str[2] = hex_digits[(num >> 12) & 0x0F]; 
+
+    str[3] = hex_digits[(num >> 8) & 0x0F];  
+
+    str[4] = hex_digits[(num >> 4) & 0x0F];  
+
+    str[5] = hex_digits[num & 0x0F];         
+    
+    str[6] = '\0';
+}
+
+void IntToStr(uint16_t num, char* str) {
+    uint8_t i = 0;
+    char temp[6];
+    
+    if (num == 0) {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+    
+    while (num > 0) {
+        temp[i] = (num % 10) + '0';
+        num = num / 10;
+        i++;
+    }
+
+    uint8_t j = 0;
+    while (i > 0) {
+        i--;
+        str[j] = temp[i];
+        j++;
+    }
+    str[j] = '\0';
+}
+
 const uint8_t Font5x7[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00,// (space)
 	0x00, 0x00, 0x5F, 0x00, 0x00,// !
@@ -114,47 +157,41 @@ void delay(volatile unsigned long ms) {
 }
 
 void setup (void) {
-	RCC -> CR &= ~(7 << 11);  //CONFIGURED FREQUENCY TO 48MHZ
-
 	RCC -> IOPENR |= (1 << 1);  									//PORT B ENABLE
 	RCC -> APBENR1 |= (1 << 21);									//I2C1 PERHIPRAL ENABLE
 	RCC -> APBRSTR1 |= (1 << 21);									//I2C1 PERHIPRAL RESET
 	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
 	RCC -> APBENR1 |= (1 << 1);								        //TIM3 PERHIPRAL ENABLE
 
-	// --- I2C BUS RECOVERY (Kilitli Sensörleri Kurtarma Operasyonu) ---
-    
-    // PB8 ve PB9'u geçici olarak OUTPUT (01) yap
-    GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); 
-    GPIOB -> MODER |= ((1 << 16) | (1 << 18));
-    GPIOB -> OTYPER |= ((1 << 8) | (1 << 9)); // Open-Drain
-    
-    // SCL (PB8) pinini 9 kere salla (OLED'i uyandır)
-    for(int i=0; i<10; i++) {
-        GPIOB -> BSRR = (1 << 8);  // SCL HIGH
+	for(int i=0; i<9; i++) {
+        GPIOB -> BSRR = (1 << 24); // SCL LOW (PB8 Reset)
         delay(1);
-        GPIOB -> BSRR = (1 << 24); // SCL LOW
+        GPIOB -> BSRR = (1 << 8);  // SCL HIGH (PB8 Set)
         delay(1);
     }
+    
+    GPIOB -> BSRR = (1 << 25); // SDA LOW
+    delay(1);
     GPIOB -> BSRR = (1 << 8);  // SCL HIGH
+    delay(1);
     GPIOB -> BSRR = (1 << 9);  // SDA HIGH
     delay(10);
-    
-	// -----------------------------------------------------------------
-	
-	// -----------------------------------------------------------------
+
     // I2C PİNLERİNİ GERÇEKTEN ALTERNATE FUNCTION (10) YAPMAK
     GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); // Önce tamamen sıfırla (00)
     GPIOB -> MODER |= ((2 << 16) | (2 << 18));  // Sonra 10 (Binary 2) yazarak AF yap!
+
+	GPIOB -> PUPDR &= ~((3 << 16) | (3 << 18)); // PULL-UP/DOWN (00)
+	GPIOB -> PUPDR |= ((1 << 16) | (1 << 18));  // PULL-UP ENABLE (01)
     
     GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   // OPEN-DRAIN ENABLE
     GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); // SCL AND SDA ENABLE
 	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
 	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE (DATASHEET PAGE 37)
 
-	//100Khz for 48Mhz Table 115.
+	//100Khz for 16Mhz Table 114.
 
-	I2C1 -> TIMINGR |= ((0xB << 28)   //PRESC
+	I2C1 -> TIMINGR |= ((0x3 << 28)   //PRESC
 					|  (0x13 << 0)    //SCLL
 					|  (0xF << 8)     //SCLH
 					|  (0x2 << 16)    //SDADEL
@@ -165,8 +202,8 @@ void setup (void) {
 
 	//TIMER CONFIGURATION FOR 1HZ INTERRUPT
 	TIM3 -> CNT = 0; 				  //COUNTER RESET
-	TIM3 -> PSC = 48000 - 1; 		  //PRESCALER (48MHZ / 48000 = 1KHZ)
-	TIM3 -> ARR = 7 - 1; 		 	  //AUTO RELOAD REGISTER (1KHZ / 4.5 = 222.22HZ)
+	TIM3 -> PSC = 16000 - 1; 		  //PRESCALER (16MHZ / 16000 = 1KHZ)
+	TIM3 -> ARR = 4 - 1; 		 	  //AUTO RELOAD REGISTER (1KHZ / 4.5 = 222.22HZ)
 
 	//TIMER INTERRUPT CONFIGURATION
 	TIM3 -> DIER |= (1 << 0); 		  //UPDATE INTERRUPT
@@ -178,7 +215,7 @@ void setup (void) {
 void TIM3_IRQHandler(void) {
 	if (TIM3 -> SR & (1 << 0)) {  //UPDATE INTERRUPT FLAG CONTROL
 		trigger = 1;
-		TIM3 -> SR &= ~(1 << 0); //UPDATE INTERRUPT FLAG RESET
+		TIM3 -> SR &= ~(1 << 0);  //UPDATE INTERRUPT FLAG RESET
 	}
 }
 
@@ -201,6 +238,9 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 	}
 	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
 	I2C1 -> CR2 |= (1 << 14); //STOP
+
+	while((I2C1 -> ISR & (1 << 5)) == 0) { } //STOP FLAG CONTROL
+	I2C1 -> ICR |= (1 << 5); //STOP FLAG RESET
 }
 
 void OLED_Open() {
@@ -266,13 +306,18 @@ uint8_t BMP180_Read_Byte(void) {
 					| (1 << 13)); //START
 
 	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
-
 	read_value = I2C1->RXDR; //read_value must be 0x55 (BMP180 DATASHEET PAGE 18 FIGURE 6 CHIP ID)
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ {}
 	I2C1->CR2 |= (1 << 14); //STOP
-	return read_value;
+	while((I2C1->ISR & (1 << 5)) == 0) { } //STOP FLAG CONTROL
+	I2C1->ICR |= (1 << 5); //STOP FLAG RESET
+	
+	return read_value; 
 }
 
-void OLED_PutChar(char c) {
+void OLED_PutChar(uint8_t c) {
+	if (c < 32 || c > 126) return; //IF CHARACTER IS OUT OF RANGE, RETURN
+	
 	uint16_t index = (c - 32)*5;
 	uint8_t charr[7]; 													//1 CONTROL BYTE + 5 FONT BYTES + 1 SPACE BYTE
 	charr[0] = 0x40;
@@ -304,9 +349,13 @@ void BMP180_Read_16Bit(void) {
 	I2C1->TXDR = 0x2E; 				  //CONTROL REGISTER VALUE (BMP180 DATASHEET PAGE 21 TABLE 8)
 	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
 	I2C1->CR2 |= (1 << 14);
+	while ((I2C1->ISR & (1 << 5)) == 0) { } //STOP FLAG CONTROL
+	I2C1->ICR |= (1 << 5); 				  //STOP FLAG RESET
+
+	TIM3->CNT = 0; 					  //COUNTER RESET
+	trigger = 0;					  //TRIGGER FLAG RESET
 	TIM3->CR1 |= (1 << 0); 		      //TIMER ENABLE
 	while(trigger == 0) { } 		  //WAIT UNTIL TRIGGER FLAG IS SET (1/222.22HZ = 4.5ms)
-	trigger = 0;					  //TRIGGER FLAG RESET
 	TIM3->CR1 &= ~(1 << 0);			  //TIMER DISABLE
 
 	//LSB AND MSB READ
@@ -315,7 +364,7 @@ void BMP180_Read_16Bit(void) {
 				| (1 << 13)); //START
 	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0xF6;
-	while((I2C1 -> ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
 	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
 				| (2 << 16)   //NBYTE (2 byte)
 				| (1 << 10)   //READ MODE
@@ -324,24 +373,43 @@ void BMP180_Read_16Bit(void) {
 	msb = I2C1->RXDR;
 	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }  //WHAT IS DOING IF RXNE FLAG IS NOT SET? JUST WAITING UNTIL RXNE FLAG IS SET
 	lsb = I2C1->RXDR;
-	I2C1->CR2 |= (1 << 14); //STOP
+
+	while((I2C1 -> ISR & (1 << 6)) == 0) { } //COMPLETE FLAG CONTROL
+	I2C1->CR2 |= (1 << 14);                  //STOP
+    while((I2C1 -> ISR & (1 << 5)) == 0) { } //STOP FLAG CONTROL
+	I2C1->ICR |= (1 << 5);                   //STOP FLAG RESET
 
 	value = (msb << 8) | lsb; //COMBINE MSB AND LSB
 }
 
 int main (void) {
 	setup();
-	delay(1000); //WAIT 1 SECOND FOR STABILIZATION
+	delay(1000); 
 	OLED_Open();
 	clear_pixels();
 
-	BMP180_Read_16Bit();
+	char val_str[10] = {0};
+    char id_str[10] = {0};
 
-	char text[50] = {0};
-	sprintf(text,"Read Value : %x",value); //SPRINTF FUNCTION TO CONVERT INT TO STRING (!BUT HEAVY FUNCTION!)
+    // 1. SENSÖRÜN KİMLİĞİNİ OKU
+    uint8_t chip_id = BMP180_Read_Byte();
+    IntToHexStr(chip_id, id_str);
 
-	Set_Cursor(0,0);
-	OLED_Print(text);
+    // KİMLİĞİ EKRANA YAZDIR
+    Set_Cursor(0,0);
+    OLED_Print("Chip ID: ");
+    OLED_Print(id_str);
 
-	while (1) {}
+	while (1) {
+        // 2. SICAKLIĞI OKU
+		BMP180_Read_16Bit();
+		IntToHexStr(value, val_str);
+		
+		Set_Cursor(0,2); // Alt satıra yazdır
+		OLED_Print("Value: ");
+		OLED_Print(val_str); 
+		OLED_Print("  ");    
+
+		delay(200); 
+	}
 }
