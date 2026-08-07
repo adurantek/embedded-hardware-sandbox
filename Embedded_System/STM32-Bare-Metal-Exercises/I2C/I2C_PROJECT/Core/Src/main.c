@@ -163,26 +163,9 @@ void setup (void) {
 	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
 	RCC -> APBENR1 |= (1 << 1);								        //TIM3 PERHIPRAL ENABLE
 
-	for(int i=0; i<9; i++) {
-        GPIOB -> BSRR = (1 << 24); // SCL LOW (PB8 Reset)
-        delay(1);
-        GPIOB -> BSRR = (1 << 8);  // SCL HIGH (PB8 Set)
-        delay(1);
-    }
-    
-    GPIOB -> BSRR = (1 << 25); // SDA LOW
-    delay(1);
-    GPIOB -> BSRR = (1 << 8);  // SCL HIGH
-    delay(1);
-    GPIOB -> BSRR = (1 << 9);  // SDA HIGH
-    delay(10);
-
     // I2C PİNLERİNİ GERÇEKTEN ALTERNATE FUNCTION (10) YAPMAK
     GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); // Önce tamamen sıfırla (00)
     GPIOB -> MODER |= ((2 << 16) | (2 << 18));  // Sonra 10 (Binary 2) yazarak AF yap!
-
-	GPIOB -> PUPDR &= ~((3 << 16) | (3 << 18)); // PULL-UP/DOWN (00)
-	GPIOB -> PUPDR |= ((1 << 16) | (1 << 18));  // PULL-UP ENABLE (01)
     
     GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   // OPEN-DRAIN ENABLE
     GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); // SCL AND SDA ENABLE
@@ -411,23 +394,12 @@ int main (void) {
 	clear_pixels();
 
 	char val_str[10] = {0};
-    char id_str[10] = {0};
-
-    // 1. SENSÖRÜN KİMLİĞİNİ OKU
-    uint8_t chip_id = BMP180_Read_Byte();
-    IntToHexStr(chip_id, id_str);
-
-    // KİMLİĞİ EKRANA YAZDIR
-    Set_Cursor(0,0);
-    OLED_Print("Chip ID: ");
-    OLED_Print(id_str);
 
 	while (1) {
-        // 2. SICAKLIĞI OKU
 		BMP180_Read_16Bit();
 		IntToHexStr(value, val_str);
 		
-		Set_Cursor(0,2); // Alt satıra yazdır
+		Set_Cursor(0,2);
 		OLED_Print("Value: ");
 		OLED_Print(val_str); 
 		OLED_Print("  ");    
