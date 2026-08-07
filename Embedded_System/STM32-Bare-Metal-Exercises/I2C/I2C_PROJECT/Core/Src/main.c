@@ -4,7 +4,7 @@
 #include "stm32c031xx.h"
 #include "stm32c0xx.h"
 
-uint8_t lsb, msb, read_value = 0;
+uint8_t lsb, msb, read_value, flagread = 0;
 uint16_t value = 0;
 volatile uint8_t trigger = 0;
 
@@ -232,7 +232,7 @@ void I2C_Write_Byte(uint8_t *data_array, uint8_t adres, uint8_t size) {
 			I2C1 -> CR2 |= (1 << 14); //STOP
 			return; //IF NACK FLAG IS SET, STOP AND RETURN
 		}
-	} //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
+	}
 	
 	I2C1 -> TXDR = data_array[i];
 	}
@@ -333,31 +333,53 @@ void OLED_Print(char *str) {
 	}
 }
 
+uint8_t BMP180_FINISHFLAG(void) {
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (1 byte)
+				| (1 << 13)); //START			
+	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { }
+	I2C1->TXDR = 0xF4;
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 |= (1 << 14); 				//STOP
+	while((I2C1->ISR & (1 << 5)) == 0) { }  //STOP FLAG CONTROL
+	I2C1->ICR |= (1 << 5); 					//STOP FLAG RESET
+	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
+				| (1 << 16)   //NBYTE (1 byte)
+				| (1 << 10)   //READ MODE
+				| (1 << 13)); //START
+	while((I2C1->ISR & (1 << 2)) == 0) /* RXNE FLAG CONTROL */ { }
+	flagread = I2C1->RXDR;
+	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
+	I2C1->CR2 |= (1 << 14); 				//STOP
+	while((I2C1->ISR & (1 << 5)) == 0) { }  //STOP FLAG CONTROL
+	I2C1->ICR |= (1 << 5); 					//STOP FLAG RESET
+	
+	return (flagread & (1 << 5));
+}
+
 void BMP180_Read_16Bit(void) {
 	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
 				| (2 << 16)   //NBYTE (2 byte)
 				| (1 << 13)); //START
-	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ {
-		if (I2C1->ISR & (1 << 4)) { //NACK FLAG CONTROL
-			I2C1->ICR |= (1 << 4); //NACK FLAG RESET
-			I2C1->CR2 |= (1 << 14); //STOP
-			return; //IF NACK FLAG IS SET, STOP AND RETURN
+		while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ {
+			if (I2C1->ISR & (1 << 4)) { //NACK FLAG CONTROL
+				I2C1->ICR |= (1 << 4); //NACK FLAG RESET
+				I2C1->CR2 |= (1 << 14); //STOP
+				while((I2C1->ISR & (1 << 5)) == 0) { } //STOPF
+				I2C1->ICR |= (1 << 5); //STOP FLAG RESET
+				return;
+			}
 		}
-	 } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0xF4; 				  //WRITE REGISTER ADDRESS (BMP180 DATASHEET PAGE 21 TABLE 8)
 	while((I2C1->ISR & (1 << 1)) == 0) /* TXIS FLAG CONTROL */ { } //WHAT IS DOING IF TXIS FLAG IS NOT SET? JUST WAITING UNTIL TXIS FLAG IS SET
 	I2C1->TXDR = 0x2E; 				  //CONTROL REGISTER VALUE (BMP180 DATASHEET PAGE 21 TABLE 8)
 	while((I2C1->ISR & (1 << 6)) == 0) /* COMPLETE FLAG CONTROL */ { }
-	I2C1->CR2 |= (1 << 14);
+	I2C1->CR2 |= (1 << 14);					//STOP
 	while ((I2C1->ISR & (1 << 5)) == 0) { } //STOP FLAG CONTROL
-	I2C1->ICR |= (1 << 5); 				  //STOP FLAG RESET
+	I2C1->ICR |= (1 << 5); 				  	//STOP FLAG RESET
 
-	TIM3->CNT = 0; 					  //COUNTER RESET
-	trigger = 0;					  //TRIGGER FLAG RESET
-	TIM3->CR1 |= (1 << 0); 		      //TIMER ENABLE
-	while(trigger == 0) { } 		  //WAIT UNTIL TRIGGER FLAG IS SET (1/222.22HZ = 4.5ms)
-	TIM3->CR1 &= ~(1 << 0);			  //TIMER DISABLE
-
+	while(!BMP180_FINISHFLAG()) { } //WAIT UNTIL BMP180 FINISH FLAG IS SET
+	
 	//LSB AND MSB READ
 	I2C1->CR2 =	 ((0x77 << 1) //SADD (BMP180 ADDRESS)
 				| (1 << 16)   //NBYTE (1 byte)
