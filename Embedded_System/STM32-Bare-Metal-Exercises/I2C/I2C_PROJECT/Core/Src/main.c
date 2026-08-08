@@ -158,10 +158,23 @@ void delay(volatile unsigned long ms) {
 
 void setup (void) {
 	RCC -> IOPENR |= (1 << 1);  									//PORT B ENABLE
-	RCC -> APBENR1 |= (1 << 21);									//I2C1 PERHIPRAL ENABLE
+	RCC -> APBENR1 |= (1 << 21);									//I2C1 PERHIPRAL ENABLE						//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
 	RCC -> APBRSTR1 |= (1 << 21);									//I2C1 PERHIPRAL RESET
-	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE (BECAUSE OLED SCREEN IS NOT WORKING WITHOUT RESET RELEASE)
-	RCC -> APBENR1 |= (1 << 1);								        //TIM3 PERHIPRAL ENABLE
+	RCC -> APBRSTR1 &= ~(1 << 21);									//I2C1 PERHIPRAL RESET RELEASE
+	RCC -> APBENR1 |= (1 << 1);	 									//TIMER3 PERHIPRAL ENABLE
+	
+	GPIOB->MODER &= ~((3 << 16) | (3 << 18)); // MODER (00) (PB8 AND PB9)
+	GPIOB->MODER |= ((1 << 16) | (1 << 18));  // MODER (01) (PB8 AND PB9) (OUTPUT MODE)
+
+	GPIOB -> PUPDR &= ~((3 << 16) | (3 << 18)); // PULL-UP/DOWN (00)
+	GPIOB -> PUPDR |= ((1 << 16) | (1 << 18));  // PULL-UP ENABLE (01)
+	
+	for(int i=0; i<9; i++) {
+        GPIOB -> BSRR = (1 << 24); // SCL LOW (PB8 Reset)
+        delay(1);
+        GPIOB -> BSRR = (1 << 8);  // SCL HIGH (PB8 Set)
+        delay(1);
+    }
 
     // I2C PİNLERİNİ GERÇEKTEN ALTERNATE FUNCTION (10) YAPMAK
     GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); // Önce tamamen sıfırla (00)
@@ -169,8 +182,6 @@ void setup (void) {
     
     GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   // OPEN-DRAIN ENABLE
     GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); // SCL AND SDA ENABLE
-	GPIOB -> OTYPER |= ((1 << 8) | (1 << 9));   					//OPEN-DRAİN ENABLE
-	GPIOB -> AFR[1] |= ((1 << 1) | (1 << 2) | (1 << 5) | (1 << 6)); //SCL AND SDA ENABLE (DATASHEET PAGE 37)
 
 	//100Khz for 16Mhz Table 114.
 
@@ -393,15 +404,15 @@ int main (void) {
 	OLED_Open();
 	clear_pixels();
 
-	char val_str[10] = {0};
+	//char val_str[10] = {0};
 
 	while (1) {
-		BMP180_Read_16Bit();
-		IntToHexStr(value, val_str);
+		//BMP180_Read_16Bit();
+		//IntToHexStr(value, val_str);
 		
 		Set_Cursor(0,2);
 		OLED_Print("Value: ");
-		OLED_Print(val_str); 
+		//OLED_Print(val_str); 
 		OLED_Print("  ");    
 
 		delay(200); 
