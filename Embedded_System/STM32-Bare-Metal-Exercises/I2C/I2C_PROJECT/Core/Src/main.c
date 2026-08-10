@@ -176,6 +176,7 @@ void setup (void) {
         delay(1);
     }
 
+
     // I2C PİNLERİNİ GERÇEKTEN ALTERNATE FUNCTION (10) YAPMAK
     GPIOB -> MODER &= ~((3 << 16) | (3 << 18)); // Önce tamamen sıfırla (00)
     GPIOB -> MODER |= ((2 << 16) | (2 << 18));  // Sonra 10 (Binary 2) yazarak AF yap!
