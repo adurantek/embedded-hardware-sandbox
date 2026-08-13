@@ -4,8 +4,10 @@
 
 #define BRR_VALUE 0x4E2
 
+char value;
+
 void delay(uint8_t ms) {
-  for (volatile int i = 0; i < ms * 1000; i++); // Simple delay loop
+  for (volatile int i = 0; i < ms * 1000; i++);                     // Simple delay loop
 }
 
 void setup(void) {
@@ -33,10 +35,18 @@ void send_string(char *str) {
   }
 }
 
+char get_char() {
+  while((USART2->ISR & (1 << 5)) == 0);                             // Wait until RXNE (Read Data Register Not Empty) flag is set
+  return USART2->RDR;                                               // Read the received character from the data register
+}
+
 int main(void) {
   setup();
+  send_string("Click the button: \r\n");
   while (1) {
-    send_string("Hello, World!\r\n");
-    delay(243); // Delay for 243 ms
+    value = get_char();
+    send_string("Word: ");
+    send_char(value);
+    send_string("\r\n");
   }
 }
