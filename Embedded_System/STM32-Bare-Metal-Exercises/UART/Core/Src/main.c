@@ -26,15 +26,17 @@ void send_char(char c) {
   USART2->TDR = c;                                                  // Transmit the character
 }
 
+void send_string(char *str) {
+  while (*str != '\0') {
+    send_char(*str);
+    str++;
+  }
+}
+
 int main(void) {
   setup();
   while (1) {
-    send_char('H');
-    send_char('e');
-    send_char('l');
-    send_char('l');
-    send_char('o');
+    send_string("Hello, World!\r\n");
     delay(243); // Delay for 243 ms
-    send_char('\n');
   }
 }
