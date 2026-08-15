@@ -6,10 +6,6 @@
 
 char value;
 
-void delay(uint8_t ms) {
-  for (volatile int i = 0; i < ms * 1000; i++);                     // Simple delay loop
-}
-
 void setup(void) {
   RCC->IOPENR |= (1 << 0);                                          // Enable GPIOA clock
   RCC->APBENR1 |= (1 << 17);                                        // Enable USART2 clock
@@ -21,6 +17,9 @@ void setup(void) {
   USART2->CR1 |= (1 << 3);                                          // Enable USART2 transmitter
   USART2->CR1 |= (1 << 2);                                          // Enable USART2 receiver
   USART2->CR1 |= (1 << 0);                                          // Enable USART2
+  USART2->CR1 |= (1 << 5);                                          // Enable Interrupt for RX
+
+  NVIC_EnableIRQ(USART2_IRQn);                                 // Enable USART2 interrupt in NVIC
 }
 
 void send_char(char c) {
@@ -35,18 +34,17 @@ void send_string(char *str) {
   }
 }
 
-char get_char() {
-  while((USART2->ISR & (1 << 5)) == 0);                             // Wait until RXNE (Read Data Register Not Empty) flag is set
-  return USART2->RDR;                                               // Read the received character from the data register
+void USART2_IRQHandler(void) {
+  if ((USART2->ISR & (1 << 5)) != 0) {                                // Control
+    value = USART2->RDR;                                              // Read the received character from the data register
+    send_string("Word: ");
+    send_char(value);
+    send_string("\r\n");                                          // Echo the received character back
+  }
 }
 
 int main(void) {
   setup();
   send_string("Click the button: \r\n");
-  while (1) {
-    value = get_char();
-    send_string("Word: ");
-    send_char(value);
-    send_string("\r\n");
-  }
+  while (1);
 }
