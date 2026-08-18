@@ -1327,7 +1327,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P15.24mm_Horizontal"
 			(at 140.462 116.84 90)
 			(hide yes)
 			(show_name no)
@@ -1492,7 +1492,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Buzzer_Beeper:Speaker_CUI_CMR-1206S-67"
 			(at 158.75 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -1571,7 +1571,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
 			(at 143.51 87.9348 0)
 			(hide yes)
 			(show_name no)
@@ -1731,7 +1731,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P15.24mm_Horizontal"
 			(at 130.81 104.648 90)
 			(hide yes)
 			(show_name no)
@@ -1810,7 +1810,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
 			(at 149.86 99.3648 0)
 			(hide yes)
 			(show_name no)
@@ -1970,7 +1970,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm"
 			(at 139.7 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -2067,7 +2067,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
 			(at 149.86 104.4448 0)
 			(hide yes)
 			(show_name no)
@@ -2148,7 +2148,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
 			(at 143.2052 113.03 0)
 			(hide yes)
 			(show_name no)
