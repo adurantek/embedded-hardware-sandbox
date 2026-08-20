@@ -2,6 +2,409 @@
 	(version 20251024)
 	(generator "kicad_symbol_editor")
 	(generator_version "10.0")
+	(symbol "Custom-LM342"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "file://C:\\Users\\adura\\Desktop\\lm324-n-mil.pdf"
+			(at 0 -1.778 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_locked" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "multi-opamp"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Custom-LM342_1_1"
+			(polyline
+				(pts
+					(xy -3.81 1.27) (xy -1.27 5.08) (xy -6.35 5.08) (xy -3.81 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin output line
+				(at -3.81 1.27 90)
+				(length 1.27)
+				(name "output"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -2.54 5.08 270)
+				(length 0.508)
+				(name "-"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 5.08 270)
+				(length 0.508)
+				(name "+"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Custom-LM342_2_1"
+			(polyline
+				(pts
+					(xy 3.81 1.27) (xy 6.35 5.08) (xy 1.27 5.08) (xy 3.81 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin input line
+				(at 5.08 5.08 270)
+				(length 0.508)
+				(name "+"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 2.54 5.08 270)
+				(length 0.508)
+				(name "-"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 3.81 1.27 90)
+				(length 1.27)
+				(name "output"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Custom-LM342_3_1"
+			(polyline
+				(pts
+					(xy 3.81 10.16) (xy 1.27 6.35) (xy 6.35 6.35) (xy 3.81 10.16)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin output line
+				(at 3.81 10.16 270)
+				(length 1.27)
+				(name "output"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 5.08 6.35 90)
+				(length 0.508)
+				(name "-"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 2.54 6.35 90)
+				(length 0.508)
+				(name "+"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Custom-LM342_4_1"
+			(polyline
+				(pts
+					(xy -3.81 10.16) (xy -6.35 6.35) (xy -1.27 6.35) (xy -3.81 10.16)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin input line
+				(at -5.08 6.35 90)
+				(length 0.508)
+				(name "+"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -2.54 6.35 90)
+				(length 0.508)
+				(name "-"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at -3.81 10.16 270)
+				(length 1.27)
+				(name "output"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Custom-LM342_5_1"
+			(rectangle
+				(start -7.62 11.43)
+				(end 7.62 1.27)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 1.27 90)
+				(length 1.27)
+				(name "V+"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 11.43 270)
+				(length 1.27)
+				(name "gnd"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 0.254 0.254)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 	(symbol "My_Component"
 		(exclude_from_sim no)
 		(in_bom yes)
